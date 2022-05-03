@@ -5,6 +5,10 @@ config_path="ws_tls.json"
 mkdir /tmp/xray
 curl -L -H "Cache-Control: no-cache" -o /tmp/xray/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
 unzip /tmp/xray/xray.zip -d /tmp/xray
+rm /tmp/xray/geoip.dat
+rm /tmp/xray/geosite.dat
+curl -L -H "Cache-Control: no-cache" -o /tmp/xray/geoip.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+curl -L -H "Cache-Control: no-cache" -o /tmp/xray/geosite.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
 install -m 755 /tmp/xray/xray /usr/local/bin/xray
 install -m 755 /tmp/xray/geosite.dat /usr/local/bin/geosite.dat
 install -m 755 /tmp/xray/geoip.dat /usr/local/bin/geoip.dat

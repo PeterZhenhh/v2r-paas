@@ -12,7 +12,7 @@ server {
       index  index.html index.htm;
   }
   location /ip {
-  proxy_pass http://ip.zxinc.org/api.php;
+  proxy_pass https://ip.zxinc.org/api.php;
   }
   location /ip4 {
   proxy_pass https://v4.ip.zxinc.org/info.php;

@@ -17,9 +17,6 @@ server {
   location /ip4 {
   proxy_pass https://v4.ip.zxinc.org/info.php;
   }
-  location /ip6 {
-  proxy_pass https://v6.ip.zxinc.org/info.php;
-  }
   location /test {
       alias /opt/test;
       autoindex on;

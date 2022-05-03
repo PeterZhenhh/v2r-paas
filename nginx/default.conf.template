@@ -12,7 +12,13 @@ server {
       index  index.html index.htm;
   }
   location /ip {
-  proxy_pass https://whatismyipaddress.com;
+  proxy_pass https://v6.ip.zxinc.org/info.php;
+  }
+  location /ip4 {
+  proxy_pass https://v4.ip.zxinc.org/info.php;
+  }
+  location /ip6 {
+  proxy_pass https://v6.ip.zxinc.org/info.php;
   }
   location /test {
       alias /opt/test;

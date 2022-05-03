@@ -1,0 +1,45 @@
+{
+  "inbounds": [
+    {
+      "port": 2053,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/$UUID-vless"
+        }
+      }
+    },
+   {
+      "port": 2054,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/$UUID-vmess"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
+}

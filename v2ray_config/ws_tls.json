@@ -67,7 +67,7 @@
             "protocol": "shadowsocks",
             "settings": {
                 "email": "love@v2fly.org",
-                "method": "$ParameterSSENCYPT",
+                "method": "chacha20-ietf-poly1305",
                 "password": "$UUID",
                 "network": "tcp,udp",
                 "ivCheck": true

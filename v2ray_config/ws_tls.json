@@ -144,7 +144,7 @@
             }
         },
         {
-            "tag": "cf-in",
+            "tag": "cf-in-vless",
             "listen": "127.0.0.1",
             "port": 3053,
             "protocol": "vless",
@@ -174,7 +174,7 @@
             }
         },
         {
-            "tag": "cf-in",
+            "tag": "cf-in-vmess",
             "listen": "127.0.0.1",
             "port": 3054,
             "protocol": "vmess",
@@ -204,7 +204,7 @@
             }
         },
         {
-            "tag": "cf-in",
+            "tag": "cf-in-ss",
             "listen": "127.0.0.1",
             "port": 3055,
             "protocol": "shadowsocks",
@@ -231,7 +231,7 @@
             }
         },
         {
-            "tag": "cf-in",
+            "tag": "cf-in-s5",
             "listen": "127.0.0.1",
             "port": 3056,
             "protocol": "socks",
@@ -259,7 +259,7 @@
             }
         },
         {
-            "tag": "cf-in",
+            "tag": "cf-in-trojan",
             "listen": "127.0.0.1",
             "port": 3057,
             "protocol": "trojan",

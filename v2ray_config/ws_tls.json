@@ -154,31 +154,23 @@
                 "domains": [
                     "geosite:tor"
                 ]
-            },
-            {
-                "type": "field",
-                "domain": [
-                    "geosite:cn"
-                ],
-                "outboundTag": "wireguard-1"
-            },
-            {
-                "type": "field",
-                "ip": [
-                    "geoip:cn"
-                ],
-                "outboundTag": "wireguard-1"
             }
         ]
     },
     "outbounds": [
-        {
-            "protocol": "freedom",
+                {
+            "protocol": "wireguard",
             "settings": {
-                "domainStrategy": "AsIs",
-                "userLevel": 0
+              "secretKey": "wGWyR2B+8tVkxgnpDDmYRqe5pd1nwl8OvjtrMOum1EQ=",
+              "address": ["172.16.0.2/32", "2606:4700:110:8949:fed8:2642:a640:c8e1/128"],
+              "peers": [
+                {
+                  "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+                  "endpoint": "engage.cloudflareclient.com:2408"
+                }
+              ]
             }
-        },
+          },
         {
             "protocol": "blackhole",
             "tag": "blocked"
@@ -194,21 +186,7 @@
                     }
                 ]
             }
-        },
-        {
-            "protocol": "wireguard",
-            "settings": {
-              "secretKey": "wGWyR2B+8tVkxgnpDDmYRqe5pd1nwl8OvjtrMOum1EQ=",
-              "address": ["172.16.0.2/32", "2606:4700:110:8949:fed8:2642:a640:c8e1/128"],
-              "peers": [
-                {
-                  "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-                  "endpoint": "engage.cloudflareclient.com:2408"
-                }
-              ]
-            },
-            "tag": "wireguard-1"
-          }
+        }
     ],
     "dns": {
         "servers": [

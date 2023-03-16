@@ -159,18 +159,10 @@
     },
     "outbounds": [
         {
-            "protocol":"wireguard",
-            "settings":{
-                "secretKey":"wGWyR2B+8tVkxgnpDDmYRqe5pd1nwl8OvjtrMOum1EQ=",
-                "address":[
-                    "172.16.0.2/32"
-                ],
-                "peers":[
-                    {
-                        "publicKey":"bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-                        "endpoint":"engage.cloudflareclient.com:2408"
-                    }
-                ]
+            "protocol": "freedom",
+            "settings": {
+                "domainStrategy": "AsIs",
+                "userLevel": 0
             }
         },
         {
@@ -189,5 +181,17 @@
                 ]
             }
         }
-    ]
+    ],
+    "dns": {
+        "servers": [
+            {
+                "address": "https+local://dns.google/dns-query",
+                "address": "https+local://cloudflare-dns.com/dns-query",
+                "skipFallback": true
+            }
+        ],
+        "queryStrategy": "AsIs",
+        "disableCache": true,
+        "disableFallbackIfMatch": false
+    }
 }

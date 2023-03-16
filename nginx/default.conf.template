@@ -35,6 +35,17 @@ server {
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+    location /a29f2368-386b-4bca-bdb2-68670d8eb12a-vless-cf {
+          proxy_redirect off;
+          proxy_pass http://127.0.0.1:3053;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header Host $host;
+           # Show real IP in v2ray access.log
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
     location /a29f2368-386b-4bca-bdb2-68670d8eb12a-vmess {
           proxy_redirect off;
           proxy_pass http://127.0.0.1:2054;
@@ -46,9 +57,31 @@ server {
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+    location /a29f2368-386b-4bca-bdb2-68670d8eb12a-vmess-cf {
+          proxy_redirect off;
+          proxy_pass http://127.0.0.1:3054;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header Host $host;
+           # Show real IP in v2ray access.log
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
     location /a29f2368-386b-4bca-bdb2-68670d8eb12a-trojan {
           proxy_redirect off;
           proxy_pass http://127.0.0.1:2057;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header Host $host;
+           # Show real IP in v2ray access.log
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    location /a29f2368-386b-4bca-bdb2-68670d8eb12a-trojan-cf {
+          proxy_redirect off;
+          proxy_pass http://127.0.0.1:3057;
           proxy_http_version 1.1;
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header Connection "upgrade";

@@ -163,8 +163,7 @@
             "settings":{
                 "secretKey":"wGWyR2B+8tVkxgnpDDmYRqe5pd1nwl8OvjtrMOum1EQ=",
                 "address":[
-                    "172.16.0.2/32",
-                    "2606:4700:110:8427:bbde:ba01:eb1f:dca0/128"
+                    "172.16.0.2/32"
                 ],
                 "peers":[
                     {

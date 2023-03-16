@@ -295,6 +295,17 @@
         "rules": [
             {
                 "type": "field",
+                "inboundTag": [
+                    "cf-in-vless",
+                    "cf-in-vmess",
+                    "cf-in-ss",
+                    "cf-in-s5",
+                    "cf-in-trojan"
+                  ],
+                "outboundTag": "cf-out"
+            },
+            {
+                "type": "field",
                 "outboundTag": "sockstor",
                 "domains": [
                     "geosite:tor"
@@ -311,6 +322,7 @@
             }
         },
         {
+            "tag":"cf-out",
             "protocol": "wireguard",
             "settings": {
               "secretKey": "$WGCFPKEY",

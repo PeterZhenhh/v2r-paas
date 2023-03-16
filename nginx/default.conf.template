@@ -24,7 +24,7 @@ server {
       autoindex_exact_size off;
       charset utf-8,gbk;
   }
-  location /a29f2368-386b-4bca-bdb2-68670d8eb12a-vless {
+  location /$UUID-vless {
           proxy_redirect off;
           proxy_pass http://127.0.0.1:2053;
           proxy_http_version 1.1;
@@ -35,7 +35,7 @@ server {
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
-    location /a29f2368-386b-4bca-bdb2-68670d8eb12a-vless-cf {
+    location /$UUID-vless-cf {
           proxy_redirect off;
           proxy_pass http://127.0.0.1:3053;
           proxy_http_version 1.1;
@@ -46,7 +46,7 @@ server {
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
-    location /a29f2368-386b-4bca-bdb2-68670d8eb12a-vmess {
+    location /$UUID-vmess {
           proxy_redirect off;
           proxy_pass http://127.0.0.1:2054;
           proxy_http_version 1.1;
@@ -57,7 +57,7 @@ server {
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
-    location /a29f2368-386b-4bca-bdb2-68670d8eb12a-vmess-cf {
+    location /$UUID-vmess-cf {
           proxy_redirect off;
           proxy_pass http://127.0.0.1:3054;
           proxy_http_version 1.1;
@@ -68,7 +68,7 @@ server {
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
-    location /a29f2368-386b-4bca-bdb2-68670d8eb12a-trojan {
+    location /$UUID-trojan {
           proxy_redirect off;
           proxy_pass http://127.0.0.1:2057;
           proxy_http_version 1.1;
@@ -79,7 +79,7 @@ server {
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
-    location /a29f2368-386b-4bca-bdb2-68670d8eb12a-trojan-cf {
+    location /$UUID-trojan-cf {
           proxy_redirect off;
           proxy_pass http://127.0.0.1:3057;
           proxy_http_version 1.1;

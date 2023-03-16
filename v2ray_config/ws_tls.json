@@ -142,151 +142,6 @@
                     "tls"
                 ]
             }
-        },
-        {
-            "tag": "cf-in",
-            "listen": "127.0.0.1",
-            "port": 3053,
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "$UUID",
-                        "level": 0,
-                        "email": "love@v2fly.org"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "allowInsecure": false,
-                "wsSettings": {
-                    "path": "/$UUID-vless-cf"
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
-            }
-        },
-        {
-            "tag": "cf-in",
-            "listen": "127.0.0.1",
-            "port": 3054,
-            "protocol": "vmess",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "$UUID",
-                        "level": 0,
-                        "email": "love@v2fly.org"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "allowInsecure": false,
-                "wsSettings": {
-                    "path": "/$UUID-vmess-cf"
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
-            }
-        },
-        {
-            "tag": "cf-in",
-            "listen": "127.0.0.1",
-            "port": 3055,
-            "protocol": "shadowsocks",
-            "settings": {
-                "email": "love@v2fly.org",
-                "method": "chacha20-ietf-poly1305",
-                "password": "$UUID",
-                "network": "tcp,udp",
-                "ivCheck": true
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "path": "/$UUID-ss-cf"
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
-            }
-        },
-        {
-            "tag": "cf-in",
-            "listen": "127.0.0.1",
-            "port": 3056,
-            "protocol": "socks",
-            "settings": {
-                "auth": "password",
-                "accounts": [
-                    {
-                        "user": "$UUID",
-                        "pass": "$UUID"
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "ws",
-                "wsSettings": {
-                    "path": "/$UUID-socks-cf"
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
-            }
-        },
-        {
-            "tag": "cf-in",
-            "listen": "127.0.0.1",
-            "port": 3057,
-            "protocol": "trojan",
-            "settings": {
-                "clients": [
-                    {
-                        "password": "$UUID",
-                        "level": 0,
-                        "email": "love@v2fly.org"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "allowInsecure": false,
-                "wsSettings": {
-                    "path": "/$UUID-trojan-cf"
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
-            }
         }
     ],
     "routing": {
@@ -311,27 +166,11 @@
     },
     "outbounds": [
         {
+            "tag": "cf-out",
             "protocol": "freedom",
             "settings": {
                 "domainStrategy": "AsIs",
                 "userLevel": 0
-            }
-        },
-        {
-            "tag": "cf-out",
-            "protocol": "wireguard",
-            "settings": {
-                "secretKey": "$WGCFPKEY",
-                "address": [
-                    "172.16.0.2/32",
-                    "2606:4700:110:8949:fed8:2642:a640:c8e1/128"
-                ],
-                "peers": [
-                    {
-                        "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-                        "endpoint": "engage.cloudflareclient.com:2408"
-                    }
-                ]
             }
         },
         {

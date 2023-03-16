@@ -17,7 +17,7 @@ xray -version
 rm -rf /tmp/xray
 # XRay new configuration
 install -d /usr/local/etc/xray
-envsubst '\$UUID,\$WS_PATH' < $config_path > /usr/local/etc/xray/config.json
+envsubst '\$UUID,\$WGCFPKEY,\$WS_PATH' < $config_path > /usr/local/etc/xray/config.json
 # MK TEST FILES
 mkdir /opt/test
 cd /opt/test

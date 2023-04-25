@@ -26,4 +26,4 @@ dd if=/dev/zero of=10mb.bin bs=10M count=1
 # Run XRay
 /usr/local/bin/xray -config /usr/local/etc/xray/config.json &
 # Run nginx
-bash -c "envsubst '\$PORT,\$UUID,\$WS_PATH' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+sh -c "envsubst '\$PORT,\$UUID,\$WS_PATH' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'

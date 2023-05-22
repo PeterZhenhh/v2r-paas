@@ -5,36 +5,31 @@
 | ------------ | ------------ | ------------ |
 |  UUID |  [uuid在线生成器](https://www.uuidgenerator.net "uuid在线生成器") | 用户主ID  |
 |  PORT |  80 | docker开放端口  |
+|  CFKEY |  xxxx | WARP "private_key" 值  |
+|  CFV6 |  2606:4700::/128 | WARP IPv6 地址，结尾加 /128  |
+|  CFR1 |  1 | WARP "reserved" 值1  |
+|  CFR2 |  2 | WARP "reserved" 值1  |
+|  CFR3 |  3 | WARP "reserved" 值1  |
 
-
-### 客户端配置
-
-```
-  - name: "yourName"
-    type: vless
-    server: yourName.workers.dev
-    port: 443
-    uuid: yourUuid
-    alterId: 0
-    cipher: auto
-    udp: true
-    tls: true
-    #skip-cert-verify: true
-    network: ws
-    ws-path: /$UUID-vless
-```
+### 服务端入站(普通)
 
 ```
-  - name: "yourName"
-    type: vmess
-    server: yourName.workers.dev
-    port: 443
-    uuid: yourUuid
-    alterId: 0
-    cipher: auto
-    udp: true
-    tls: true
-    #skip-cert-verify: true
-    network: ws
-    ws-path: /$UUID-vmess
+  /$UUID-vless
+  /$UUID-vmess
+  /$UUID-ss
+  /$UUID-socks
+  /$UUID-trojan
+```
+
+### 服务端入站(CF WARP)
+#### 使用 warp-reg，注册warp
+```
+curl -sLo warp-reg https://github.com/badafans/warp-reg/releases/download/v1.0/main-linux-amd64 && chmod +x warp-reg && ./warp-reg
+```
+```
+  /$UUID-vless-cf
+  /$UUID-vmess-cf
+  /$UUID-ss-cf
+  /$UUID-socks-cf
+  /$UUID-trojan-cf
 ```

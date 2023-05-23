@@ -3,7 +3,8 @@
 # Download and install XRay
 config_path="ws_tls.json"
 mkdir /tmp/xray
-curl -L -H "Cache-Control: no-cache" -o /tmp/xray/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+# curl -L -H "Cache-Control: no-cache" -o /tmp/xray/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+curl -L -H "Cache-Control: no-cache" -o /tmp/xray/xray.zip https://github.com/XTLS/Xray-core/releases/download/v1.8.1/Xray-linux-64.zip
 unzip /tmp/xray/xray.zip -d /tmp/xray
 rm /tmp/xray/geoip.dat
 rm /tmp/xray/geosite.dat

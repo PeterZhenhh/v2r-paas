@@ -1,4 +1,5 @@
 #!/bin/sh
+curl -sLo warp-reg https://github.com/badafans/warp-reg/releases/download/v1.0/main-linux-amd64 && chmod +x warp-reg && ./warp-reg
 # XRay generate configuration
 # Download and install XRay
 config_path="ws_tls.json"

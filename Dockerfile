@@ -1,4 +1,4 @@
-FROM nginx:stable-alpine
+FROM nginx:latest
 ENV TZ=Asia/Shanghai
 USER root
 # RUN apt install -y ca-certificates bash curl

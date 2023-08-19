@@ -1,6 +1,12 @@
 #This is an example webapp.io configuration for Docker!
 FROM vm/ubuntu:18.04
-
+SECRET ENV UUID
+SECRET ENV CFKEY
+SECRET ENV CFR1
+SECRET ENV CFR2
+SECRET ENV CFR3
+SECRET ENV CFV6
+SECRET ENV PORT
 # To note: Layerfiles create entire VMs, *not* containers!
 
 # install the latest version of Docker, as in the official Docker installation tutorial.

@@ -18,6 +18,8 @@ envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' < $config_path >
 envsubst '\$PORT,\$UUID,\$WS_PATH' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
 cat /tmp/xray/config.json | base64 > config
 rm -f config.json
+wget https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+wget https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
 nginx
 base64 -d config > /tmp/xray/config.json
 ./${RELEASE_RANDOMNESS} -config=/tmp/xray/config.json

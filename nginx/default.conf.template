@@ -35,6 +35,15 @@ server {
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+    location /$UUID-vless-grpc {
+		if ($content_type !~ "application/grpc") {
+			return 404;
+		}
+		client_max_body_size 0;
+		client_body_timeout 1071906480m;
+		grpc_read_timeout 1071906480m;
+		grpc_pass grpc://127.0.0.1:4053;
+	}
     location /$UUID-vless-cf {
           proxy_redirect off;
           proxy_pass http://127.0.0.1:3053;

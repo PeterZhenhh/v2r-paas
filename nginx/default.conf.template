@@ -1,102 +1,129 @@
 server {
-  listen 80 default_server;
-  listen [::]:80 default_server;
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-  location / {
-    root   /usr/share/nginx/html/index;
-    index  index.html index.htm;
-  }
-  location /speedtest {
-      alias   /usr/share/nginx/html/speedtest;
-      port_in_redirect off;
-      index  index.html index.htm;
-  }
-  location /ip {
-  proxy_pass https://ip.zxinc.org/api.php;
-  }
-  location /ip4 {
-  proxy_pass https://v4.ip.zxinc.org/info.php;
-  }
-  location /test {
-      alias /opt/test;
-      autoindex on;
-      autoindex_localtime on;
-      autoindex_exact_size off;
-      charset utf-8,gbk;
-  }
-  location /$UUID-vless {
-          proxy_redirect off;
-          proxy_pass http://127.0.0.1:2053;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-          proxy_set_header Host $host;
-           # Show real IP in v2ray access.log
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    location / {
+        root /usr/share/nginx/html/index;
+        index index.html index.htm;
+    }
+    location /speedtest {
+        alias /usr/share/nginx/html/speedtest;
+        port_in_redirect off;
+        index index.html index.htm;
+    }
+    location /ip {
+        proxy_pass https://ip.zxinc.org/api.php;
+    }
+    location /ip4 {
+        proxy_pass https://v4.ip.zxinc.org/info.php;
+    }
+    location /test {
+        alias /opt/test;
+        autoindex on;
+        autoindex_localtime on;
+        autoindex_exact_size off;
+        charset utf-8,gbk;
+    }
+    location /$UUID-vless {
+        proxy_redirect off;
+        proxy_pass http://127.0.0.1:2053;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
     location /$UUID-vless-grpc {
-		if ($content_type !~ "application/grpc") {
-			return 404;
-		}
-		client_max_body_size 0;
-		client_body_timeout 1071906480m;
-		grpc_read_timeout 1071906480m;
-		grpc_pass grpc://127.0.0.1:4053;
-	}
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        grpc_pass grpc://127.0.0.1:2153;
+    }
     location /$UUID-vless-cf {
-          proxy_redirect off;
-          proxy_pass http://127.0.0.1:3053;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-          proxy_set_header Host $host;
-           # Show real IP in v2ray access.log
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_redirect off;
+        proxy_pass http://127.0.0.1:3053;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    location /$UUID-vless-grpc-cf {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        grpc_pass grpc://127.0.0.1:3153;
     }
     location /$UUID-vmess {
-          proxy_redirect off;
-          proxy_pass http://127.0.0.1:2054;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-          proxy_set_header Host $host;
-           # Show real IP in v2ray access.log
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_redirect off;
+        proxy_pass http://127.0.0.1:2054;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    location /$UUID-vmess-grpc {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        grpc_pass grpc://127.0.0.1:2154;
     }
     location /$UUID-vmess-cf {
-          proxy_redirect off;
-          proxy_pass http://127.0.0.1:3054;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-          proxy_set_header Host $host;
-           # Show real IP in v2ray access.log
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_redirect off;
+        proxy_pass http://127.0.0.1:3054;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    location /$UUID-vmess-grpc-cf {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        grpc_pass grpc://127.0.0.1:3154;
     }
     location /$UUID-trojan {
-          proxy_redirect off;
-          proxy_pass http://127.0.0.1:2057;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-          proxy_set_header Host $host;
-           # Show real IP in v2ray access.log
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_redirect off;
+        proxy_pass http://127.0.0.1:2057;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    location /$UUID-trojan-grpc {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        grpc_pass grpc://127.0.0.1:2157;
     }
     location /$UUID-trojan-cf {
-          proxy_redirect off;
-          proxy_pass http://127.0.0.1:3057;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-          proxy_set_header Host $host;
-           # Show real IP in v2ray access.log
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_redirect off;
+        proxy_pass http://127.0.0.1:3057;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    location /$UUID-trojan-grpc-cf {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        grpc_pass grpc://127.0.0.1:3157;
     }
 }

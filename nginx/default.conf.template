@@ -1,6 +1,7 @@
 server {
-    listen 80 http2 default_server;
-    listen [::]:80 http2 default_server;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    http2 on;
 
     location / {
         root /usr/share/nginx/html/index;

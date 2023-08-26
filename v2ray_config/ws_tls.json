@@ -34,6 +34,25 @@
         },
         {
             "listen": "127.0.0.1",
+            "port": 2153,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/$UUID-vless-grpc"
+                }
+            }
+        },
+        {
+            "listen": "127.0.0.1",
             "port": 2054,
             "protocol": "vmess",
             "settings": {
@@ -51,6 +70,34 @@
                 "allowInsecure": false,
                 "wsSettings": {
                     "path": "/$UUID-vmess"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "listen": "127.0.0.1",
+            "port": 2154,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/$UUID-vmess-grpc"
                 }
             },
             "sniffing": {
@@ -89,6 +136,31 @@
         },
         {
             "listen": "127.0.0.1",
+            "port": 2155,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/$UUID-ss-grpc"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "listen": "127.0.0.1",
             "port": 2056,
             "protocol": "socks",
             "settings": {
@@ -104,6 +176,33 @@
                 "network": "ws",
                 "wsSettings": {
                     "path": "/$UUID-socks"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "listen": "127.0.0.1",
+            "port": 2156,
+            "protocol": "socks",
+            "settings": {
+                "auth": "password",
+                "accounts": [
+                    {
+                        "user": "$UUID",
+                        "pass": "$UUID"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/$UUID-socks-grpc"
                 }
             },
             "sniffing": {
@@ -144,7 +243,35 @@
             }
         },
         {
-            "tag": "cf-in-vless",
+            "listen": "127.0.0.1",
+            "port": 2157,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/$UUID-trojan-grpc"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "tag": "in-vless-cf",
             "listen": "127.0.0.1",
             "port": 3053,
             "protocol": "vless",
@@ -174,7 +301,27 @@
             }
         },
         {
-            "tag": "cf-in-vmess",
+            "tag": "in-vless_grpc-cf",
+            "listen": "127.0.0.1",
+            "port": 3153,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/$UUID-vless-grpc-cf"
+                }
+            }
+        },
+        {
+            "tag": "in-vmess-cf",
             "listen": "127.0.0.1",
             "port": 3054,
             "protocol": "vmess",
@@ -204,7 +351,36 @@
             }
         },
         {
-            "tag": "cf-in-ss",
+            "tag": "in-vmess_grpc-cf",
+            "listen": "127.0.0.1",
+            "port": 3154,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/$UUID-vmess-grpc-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "tag": "in-ss-cf",
             "listen": "127.0.0.1",
             "port": 3055,
             "protocol": "shadowsocks",
@@ -231,7 +407,33 @@
             }
         },
         {
-            "tag": "cf-in-s5",
+            "tag": "in-ss_grpc-cf",
+            "listen": "127.0.0.1",
+            "port": 3155,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/$UUID-ss-grpc-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "tag": "in-s5-cf",
             "listen": "127.0.0.1",
             "port": 3056,
             "protocol": "socks",
@@ -259,7 +461,35 @@
             }
         },
         {
-            "tag": "cf-in-trojan",
+            "tag": "in-s5_grpc-cf",
+            "listen": "127.0.0.1",
+            "port": 3156,
+            "protocol": "socks",
+            "settings": {
+                "auth": "password",
+                "accounts": [
+                    {
+                        "user": "$UUID",
+                        "pass": "$UUID"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/$UUID-socks-grpc-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "tag": "in-trojan-cf",
             "listen": "127.0.0.1",
             "port": 3057,
             "protocol": "trojan",
@@ -289,13 +519,16 @@
             }
         },
         {
+            "tag": "in-trojan_grpc-cf",
             "listen": "127.0.0.1",
-            "port": 4053,
-            "protocol": "vless",
+            "port": 3157,
+            "protocol": "trojan",
             "settings": {
                 "clients": [
                     {
-                        "id": "$UUID"
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
                     }
                 ],
                 "decryption": "none"
@@ -303,8 +536,15 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/a29f2368-386b-4bca-bdb2-68670d8eb12a-vless-grpc"
+                    "serviceName": "/$UUID-trojan-grpc-cf"
                 }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
             }
         }
     ],
@@ -315,11 +555,16 @@
             {
                 "type": "field",
                 "inboundTag": [
-                    "cf-in-vless",
-                    "cf-in-vmess",
-                    "cf-in-ss",
-                    "cf-in-s5",
-                    "cf-in-trojan"
+                    "in-vless-cf",
+                    "in-vless_grpc-cf",
+                    "in-vmess-cf",
+                    "in-vmess_grpc-cf",
+                    "in-ss-cf",
+                    "in-ss_grpc-cf",
+                    "in-s5-cf",
+                    "in-s5_grpc-cf",
+                    "in-trojan-cf",
+                    "in-trojan_grpc-cf"
                 ],
                 "outboundTag": "cf-out"
             },

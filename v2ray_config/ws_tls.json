@@ -47,7 +47,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-vless"
+                    "serviceName": "/$UUID-vless_grpc"
                 }
             }
         },

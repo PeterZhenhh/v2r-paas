@@ -287,6 +287,25 @@
                     "tls"
                 ]
             }
+        },
+        {
+            "listen": "127.0.0.1",
+            "port": 4053,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "/a29f2368-386b-4bca-bdb2-68670d8eb12a-vless-grpc"
+                }
+            }
         }
     ],
     "routing": {

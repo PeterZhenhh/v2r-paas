@@ -47,7 +47,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-vless-grpc"
+                    "serviceName": "/$UUID-vless_grpc"
                 }
             }
         },
@@ -97,7 +97,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-vmess-grpc"
+                    "serviceName": "/$UUID-vmess_grpc"
                 }
             },
             "sniffing": {
@@ -148,7 +148,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-ss-grpc"
+                    "serviceName": "/$UUID-ss_grpc"
                 }
             },
             "sniffing": {
@@ -202,7 +202,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-socks-grpc"
+                    "serviceName": "/$UUID-socks_grpc"
                 }
             },
             "sniffing": {
@@ -259,7 +259,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-trojan-grpc"
+                    "serviceName": "/$UUID-trojan_grpc"
                 }
             },
             "sniffing": {
@@ -316,7 +316,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-vless-grpc-cf"
+                    "serviceName": "/$UUID-vless_grpc-cf"
                 }
             }
         },
@@ -368,7 +368,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-vmess-grpc-cf"
+                    "serviceName": "/$UUID-vmess_grpc-cf"
                 }
             },
             "sniffing": {
@@ -421,7 +421,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-ss-grpc-cf"
+                    "serviceName": "/$UUID-ss_grpc-cf"
                 }
             },
             "sniffing": {
@@ -477,7 +477,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-socks-grpc-cf"
+                    "serviceName": "/$UUID-socks_grpc-cf"
                 }
             },
             "sniffing": {
@@ -536,7 +536,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "/$UUID-trojan-grpc-cf"
+                    "serviceName": "/$UUID-trojan_grpc-cf"
                 }
             },
             "sniffing": {

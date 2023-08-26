@@ -24,23 +24,35 @@ server {
         autoindex_exact_size off;
         charset utf-8,gbk;
     }
+
     location /$UUID-vless {
-        proxy_redirect off;
-        proxy_pass http://127.0.0.1:2053;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-        # Show real IP in v2ray access.log
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        if ($http_upgrade = "websocket") {
+            proxy_redirect off;
+            proxy_pass http://127.0.0.1:2053;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            # Show real IP in v2ray access.log
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+        if ($content_type ~ "application/grpc") {
+            client_max_body_size 0;
+            client_body_timeout 1071906480m;
+            grpc_read_timeout 1071906480m;
+            grpc_pass grpc://127.0.0.1:2153;
+        }
+        return 404;
     }
+
     location /$UUID-vless_grpc {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         grpc_pass grpc://127.0.0.1:2153;
     }
+
     location /$UUID-vless-cf {
         proxy_redirect off;
         proxy_pass http://127.0.0.1:3053;
@@ -52,12 +64,14 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+
     location /$UUID-vless_grpc-cf {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         grpc_pass grpc://127.0.0.1:3153;
     }
+
     location /$UUID-vmess {
         proxy_redirect off;
         proxy_pass http://127.0.0.1:2054;
@@ -69,12 +83,14 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+
     location /$UUID-vmess_grpc {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         grpc_pass grpc://127.0.0.1:2154;
     }
+
     location /$UUID-vmess-cf {
         proxy_redirect off;
         proxy_pass http://127.0.0.1:3054;
@@ -86,12 +102,14 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+
     location /$UUID-vmess_grpc-cf {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         grpc_pass grpc://127.0.0.1:3154;
     }
+
     location /$UUID-trojan {
         proxy_redirect off;
         proxy_pass http://127.0.0.1:2057;
@@ -103,12 +121,14 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+
     location /$UUID-trojan_grpc {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         grpc_pass grpc://127.0.0.1:2157;
     }
+
     location /$UUID-trojan-cf {
         proxy_redirect off;
         proxy_pass http://127.0.0.1:3057;
@@ -120,12 +140,14 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+
     location /$UUID-trojan_grpc-cf {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         grpc_pass grpc://127.0.0.1:3157;
     }
+
     location /$UUID-ss {
         proxy_redirect off;
         proxy_pass http://127.0.0.1:2055;
@@ -137,12 +159,14 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+
     location /$UUID-ss_grpc {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         grpc_pass grpc://127.0.0.1:2155;
     }
+
     location /$UUID-ss-cf {
         proxy_redirect off;
         proxy_pass http://127.0.0.1:3055;
@@ -154,6 +178,7 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+    
     location /$UUID-ss_grpc-cf {
         client_max_body_size 0;
         client_body_timeout 1071906480m;

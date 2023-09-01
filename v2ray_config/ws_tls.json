@@ -605,9 +605,9 @@
                     }
                 ],
                 "reserved": [
-                    "$CFR1",
-                    "$CFR2",
-                    "$CFR3"
+                    $CFR1,
+                    $CFR2,
+                    $CFR3
                 ],
                 "mtu": 1280,
                 "workers": 16

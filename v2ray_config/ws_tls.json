@@ -5,6 +5,31 @@
   "inbounds": [
     {
       "listen": "127.0.0.1",
+      "port": 1053,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "quic",
+        "quicSettings": {
+          "security": "none",
+          "key": "$UUID",
+          "header": {
+            "type": "none"
+          }
+        }
+      }
+    },
+    {
+      "listen": "127.0.0.1",
       "port": 2053,
       "protocol": "vless",
       "settings": {

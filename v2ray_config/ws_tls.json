@@ -592,13 +592,6 @@
           "in-trojan_grpc-cf"
         ],
         "outboundTag": "cf-out"
-      },
-      {
-        "type": "field",
-        "outboundTag": "sockstor",
-        "domains": [
-          "geosite:tor"
-        ]
       }
     ]
   },
@@ -641,18 +634,6 @@
     {
       "protocol": "blackhole",
       "tag": "blocked"
-    },
-    {
-      "protocol": "socks",
-      "tag": "sockstor",
-      "settings": {
-        "servers": [
-          {
-            "address": "127.0.0.1",
-            "port": 9050
-          }
-        ]
-      }
     }
   ],
   "dns": {

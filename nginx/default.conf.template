@@ -37,7 +37,9 @@ server {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
-        grpc_pass grpc://127.0.0.1:2153;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:2153;
+        }
     }
 
     location /$UUID-vless-cf {
@@ -58,7 +60,9 @@ server {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
-        grpc_pass grpc://127.0.0.1:3153;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:3153;
+        }
     }
 
     location /$UUID-vmess {
@@ -79,7 +83,9 @@ server {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
-        grpc_pass grpc://127.0.0.1:2154;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:2154;
+        }
     }
 
     location /$UUID-vmess-cf {
@@ -100,7 +106,9 @@ server {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
-        grpc_pass grpc://127.0.0.1:3154;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:3154;
+        }
     }
 
     location /$UUID-trojan {
@@ -121,7 +129,9 @@ server {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
-        grpc_pass grpc://127.0.0.1:2157;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:2157;
+        }
     }
 
     location /$UUID-trojan-cf {
@@ -142,7 +152,9 @@ server {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
-        grpc_pass grpc://127.0.0.1:3157;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:3157;
+        }
     }
 
     location /$UUID-ss {
@@ -163,7 +175,9 @@ server {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
-        grpc_pass grpc://127.0.0.1:2155;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:2155;
+        }
     }
 
     location /$UUID-ss-cf {
@@ -184,6 +198,8 @@ server {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
-        grpc_pass grpc://127.0.0.1:3155;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:3155;
+        }
     }
 }

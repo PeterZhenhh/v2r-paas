@@ -16,22 +16,14 @@ server {
         index index.html index.htm;
     }
     location /ip {
-        proxy_pass https://ip.zxinc.org/api.php;
-    }
-    location /ip4 {
-        proxy_pass https://v4.ip.zxinc.org/info.php;
-    }
-    location /test {
-        alias /opt/test;
-        autoindex on;
-        autoindex_localtime on;
-        autoindex_exact_size off;
-        charset utf-8,gbk;
+        proxy_pass http://ip-api.com/json;
     }
 
     location /$UUID-vless {
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:2053;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:2053;
+        }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -50,7 +42,9 @@ server {
 
     location /$UUID-vless-cf {
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:3053;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:3053;
+        }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -69,7 +63,9 @@ server {
 
     location /$UUID-vmess {
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:2054;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:2054;
+        }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -88,7 +84,9 @@ server {
 
     location /$UUID-vmess-cf {
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:3054;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:3054;
+        }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -107,7 +105,9 @@ server {
 
     location /$UUID-trojan {
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:2057;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:2057;
+        }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -126,7 +126,9 @@ server {
 
     location /$UUID-trojan-cf {
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:3057;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:3057;
+        }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -145,7 +147,9 @@ server {
 
     location /$UUID-ss {
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:2055;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:2055;
+        }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -164,7 +168,9 @@ server {
 
     location /$UUID-ss-cf {
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:3055;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:3055;
+        }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";

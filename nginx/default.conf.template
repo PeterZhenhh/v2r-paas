@@ -3,6 +3,8 @@ server {
     listen [::]:80 default_server;
     http2 on;
 
+    proxy_intercept_errors on;
+
     location / {
         root /usr/share/nginx/html/index;
         index index.html index.htm;

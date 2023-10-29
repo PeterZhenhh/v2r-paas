@@ -19,10 +19,42 @@ server {
         proxy_pass http://ip-api.com/json;
     }
 
+    # Xray端口=入站代理XX-底层传输Y-出站代理Z-其它N
+
+    # 入站:
+    # Dokodemo-Door	=1
+    # Vmess	=2
+    # Vless	=3
+    # Trojan	=4
+    # Shadowsocks	=5
+    # Socks		=6
+    # HTTP	=7
+    #
+    # 底层:
+    # Websocket	=0
+    # gRPC	=1
+    # HTTP2	=2
+    # TCP	=3
+    # QUIC	=4
+    # mKCP	=5
+    #
+    # 出站:
+    # Freedom	=0
+    # Wireguard	=1
+    # Vmess	=2
+    # Vless	=3
+    # Trojan	=4
+    # Shadowsocks	=5
+    # Socks		=6
+    # HTTP	=7
+    # 其它：
+    # 无	=0
+    # CFWarp	=1
+    #
     location /$UUID-vless {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:2053;
+            proxy_pass http://127.0.0.1:3000;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -38,14 +70,14 @@ server {
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         if ($http_content_type = "application/grpc") {
-            grpc_pass grpc://127.0.0.1:2153;
+            grpc_pass grpc://127.0.0.1:3100;
         }
     }
 
     location /$UUID-vless-cf {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:3053;
+            proxy_pass http://127.0.0.1:3011;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -61,14 +93,14 @@ server {
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         if ($http_content_type = "application/grpc") {
-            grpc_pass grpc://127.0.0.1:3153;
+            grpc_pass grpc://127.0.0.1:3111;
         }
     }
 
     location /$UUID-vmess {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:2054;
+            proxy_pass http://127.0.0.1:2000;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -84,14 +116,14 @@ server {
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         if ($http_content_type = "application/grpc") {
-            grpc_pass grpc://127.0.0.1:2154;
+            grpc_pass grpc://127.0.0.1:2100;
         }
     }
 
     location /$UUID-vmess-cf {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:3054;
+            proxy_pass http://127.0.0.1:2011;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -107,14 +139,14 @@ server {
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         if ($http_content_type = "application/grpc") {
-            grpc_pass grpc://127.0.0.1:3154;
+            grpc_pass grpc://127.0.0.1:2111;
         }
     }
 
     location /$UUID-trojan {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:2057;
+            proxy_pass http://127.0.0.1:4000;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -130,14 +162,14 @@ server {
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         if ($http_content_type = "application/grpc") {
-            grpc_pass grpc://127.0.0.1:2157;
+            grpc_pass grpc://127.0.0.1:4100;
         }
     }
 
     location /$UUID-trojan-cf {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:3057;
+            proxy_pass http://127.0.0.1:4011;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -153,14 +185,14 @@ server {
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         if ($http_content_type = "application/grpc") {
-            grpc_pass grpc://127.0.0.1:3157;
+            grpc_pass grpc://127.0.0.1:4111;
         }
     }
 
     location /$UUID-ss {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:2055;
+            proxy_pass http://127.0.0.1:5000;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -176,14 +208,14 @@ server {
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         if ($http_content_type = "application/grpc") {
-            grpc_pass grpc://127.0.0.1:2155;
+            grpc_pass grpc://127.0.0.1:5100;
         }
     }
 
     location /$UUID-ss-cf {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:3055;
+            proxy_pass http://127.0.0.1:5011;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -199,7 +231,7 @@ server {
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
         if ($http_content_type = "application/grpc") {
-            grpc_pass grpc://127.0.0.1:3155;
+            grpc_pass grpc://127.0.0.1:5111;
         }
     }
 }

@@ -4,6 +4,7 @@ server {
     http2 on;
 
     proxy_intercept_errors on;
+    error_page 400 = https://speed.cloudflare.com/meta;
 
     location / {
         root /usr/share/nginx/html/index;

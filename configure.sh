@@ -17,7 +17,6 @@ rm -rf /tmp
 rm -rf $config_path
 nginx
 base64 -d config > ./config.json
-cat ./config.json
 ./${RELEASE_RANDOMNESS} -config=config.json
 
 # MK TEST FILES

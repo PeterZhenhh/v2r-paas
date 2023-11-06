@@ -10,8 +10,8 @@
 |  CFR1 |  1 | WARP "reserved" 值1  |
 |  CFR2 |  2 | WARP "reserved" 值2  |
 |  CFR3 |  3 | WARP "reserved" 值3  |
-|  $TAILSCALE_HOSTNAME |  xxx-app | tailscale设备名  |
-|  $TAILSCALE_AUTHKEY |  tskey-auth-xxx | tailscale授权密钥  |
+|  TAILSCALE_HOSTNAME |  xxx-app | tailscale设备名  |
+|  TAILSCALE_AUTHKEY |  tskey-auth-xxx | tailscale授权密钥  |
 
 ### 服务端入站(普通)
 

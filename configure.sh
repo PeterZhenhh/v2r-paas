@@ -17,7 +17,7 @@ rm -rf ./tmp
 rm -rf $config_path
 nginx
 base64 -d config >./config.json
-./${RELEASE_RANDOMNESS} -config=config.json
+./${RELEASE_RANDOMNESS} -config=config.json&
 
 # tailscale
 if ! ${TAILSCALE_HOSTNAME}; then
@@ -26,5 +26,5 @@ fi
 if ${TAILSCALE_AUTHKEY}; then
     /app/tailscaled --tun=userspace-networking &
     sleep 5
-    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node --accept-routes
+    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node --accept-routes&
 fi

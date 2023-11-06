@@ -21,7 +21,7 @@ base64 -d config >./config.json
 
 # tailscale
 if [ -z $TAILSCALE_HOSTNAME ]; then
-    TAILSCALE_HOSTNAME=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
+    TAILSCALE_HOSTNAME=`hostname`
     echo "【TAILSCALE】 TAILSCALE_HOSTNAME not configured, using $TAILSCALE_HOSTNAME"
 fi
 if [ -z $TAILSCALE_AUTHKEY ]; then

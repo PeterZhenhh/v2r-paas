@@ -10,17 +10,20 @@ unzip ./tmp/xray/xray.zip -d ./tmp/xray
 # 伪装 xray 执行文件
 RELEASE_RANDOMNESS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
 mv ./tmp/xray/xray ${RELEASE_RANDOMNESS}
-envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' < $config_path > ./tmp/xray/config.json
-envsubst '\$PORT,\$UUID,\$WS_PATH' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
-cat ./tmp/xray/config.json | base64 > config
+envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' <$config_path >./tmp/xray/config.json
+envsubst '\$PORT,\$UUID,\$WS_PATH' </etc/nginx/conf.d/default.conf.template >/etc/nginx/conf.d/default.conf
+cat ./tmp/xray/config.json | base64 >config
 rm -rf ./tmp
 rm -rf $config_path
 nginx
-base64 -d config > ./config.json
+base64 -d config >./config.json
 ./${RELEASE_RANDOMNESS} -config=config.json
 
-# MK TEST FILES
-# mkdir /opt/test
-# cd /opt/test
-# dd if=/dev/zero of=100mb.bin bs=100M count=1
-# dd if=/dev/zero of=10mb.bin bs=10M count=1
+# tailscale
+if ! ${TAILSCALE_HOSTNAME}; then
+    TAILSCALE_HOSTNAME=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
+fi
+if ${TAILSCALE_AUTHKEY}; then
+    /app/tailscaled --tun=userspace-networking
+    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node --accept-routes
+fi

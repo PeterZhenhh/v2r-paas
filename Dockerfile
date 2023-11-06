@@ -10,5 +10,10 @@ COPY configure.sh /configure.sh
 COPY v2ray_config /
 RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && \
     chmod +x /configure.sh
+    
+# tailscale
+COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscaled /app/tailscaled
+COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscale /app/tailscale
+RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 
 ENTRYPOINT ["sh", "/configure.sh"]

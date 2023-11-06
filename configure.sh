@@ -20,10 +20,10 @@ base64 -d config >./config.json
 ./${RELEASE_RANDOMNESS} -config=config.json&
 
 # tailscale
-if ! ${TAILSCALE_HOSTNAME}; then
+if ! $TAILSCALE_HOSTNAME; then
     TAILSCALE_HOSTNAME=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
 fi
-if ${TAILSCALE_AUTHKEY}; then
+if $TAILSCALE_AUTHKEY; then
     /app/tailscaled --tun=userspace-networking &
     sleep 5
     /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node --accept-routes&

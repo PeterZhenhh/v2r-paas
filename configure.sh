@@ -17,14 +17,20 @@ rm -rf ./tmp
 rm -rf $config_path
 nginx
 base64 -d config >./config.json
-./${RELEASE_RANDOMNESS} -config=config.json&
+./${RELEASE_RANDOMNESS} -config=config.json &
 
 # tailscale
-if ! $TAILSCALE_HOSTNAME; then
+if [ -z $TAILSCALE_HOSTNAME ]; then
     TAILSCALE_HOSTNAME=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
+    echo "【TAILSCALE】 TAILSCALE_HOSTNAME not configured, using $TAILSCALE_HOSTNAME"
 fi
-if $TAILSCALE_AUTHKEY; then
+if [ -z $TAILSCALE_AUTHKEY ]; then
+    echo "【TAILSCALE】 TAILSCALE_AUTHKEY not configured"
+else
+    echo "【TAILSCALE】 Running"
     /app/tailscaled --tun=userspace-networking &
     sleep 5
-    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node --accept-routes&
+    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node --accept-routes &
 fi
+
+./${RELEASE_RANDOMNESS} -config=config.json

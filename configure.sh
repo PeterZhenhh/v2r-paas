@@ -30,7 +30,7 @@ else
     echo "【TAILSCALE】 Running"
     /app/tailscaled --tun=userspace-networking &
     sleep 5
-    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node --accept-routes &
+    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
 fi
 
 ./${RELEASE_RANDOMNESS} -config=config.json

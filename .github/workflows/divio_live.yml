@@ -1,4 +1,3 @@
-```
 name: Deploy Live
 
 
@@ -21,4 +20,3 @@ steps:
    - name: Deploy live app
      run: |
        curl -X POST --data "environment=${{ secrets.DIVIO_LIVE_ENVIRONMENT_UUID }}" --header “Authorization: Token ${{ secrets.DIVIO_API_TOKEN }}" https://api.divio.com/apps/v3/deployments/
-```

@@ -4,7 +4,7 @@ curl -sLo warp-reg https://github.com/badafans/warp-reg/releases/download/v1.0/m
 
 # Xray
 if [ -z $UUID ]; then
-    echo "xray UUID未配置"
+    echo "【XRAY】 UUID未配置"
 else
     config_path="ws_tls.json"
     mkdir -p ./tmp/xray

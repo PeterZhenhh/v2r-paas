@@ -38,3 +38,8 @@ fi
 
 # Nginx
 nginx
+
+#保持运行
+while true; do
+    sleep 1
+done

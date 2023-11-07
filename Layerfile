@@ -27,5 +27,5 @@ RUN apt-get update && \
 COPY . .
 
 RUN docker build --build-arg UUID=$UUID --build-arg CFKEY=$CFKEY --build-arg CFR1=$CFR1 --build-arg CFR2=$CFR2 --build-arg CFR3=$CFR3 --build-arg CFV6=$CFV6 --build-arg PORT=$PORT --build-arg TAILSCALE_HOSTNAME=$TAILSCALE_HOSTNAME --build-arg TAILSCALE_AUTHKEY=$TAILSCALE_AUTHKEY -t image .
-RUN docker run -d -p 0.0.0.0:80:80 image
-EXPOSE WEBSITE http://localhost:80
+RUN docker run -d --network=host image
+EXPOSE 80

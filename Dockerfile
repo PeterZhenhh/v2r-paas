@@ -1,6 +1,7 @@
 FROM nginx:latest
 ENV TZ=Asia/Shanghai
 ARG UUID
+RUN echo $UUID
 ARG PORT
 ARG CFKEY
 ARG CFV6

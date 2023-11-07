@@ -1,10 +1,7 @@
 name: Deploy Live
 
 on:
-  pull_request:
-types: [closed]
-branches:
-  - main
+  push
 
 jobs:
   deploy:

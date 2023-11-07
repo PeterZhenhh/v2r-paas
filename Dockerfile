@@ -1,15 +1,14 @@
 FROM nginx:latest
 ENV TZ=Asia/Shanghai
-ARG UUID
-RUN echo $UUID
-ARG PORT
-ARG CFKEY
-ARG CFV6
-ARG CFR1
-ARG CFR2
-ARG CFR3
-ARG TAILSCALE_HOSTNAME
-ARG TAILSCALE_AUTHKEY
+ENV UUID
+ENV PORT
+ENV CFKEY
+ENV CFV6
+ENV CFR1
+ENV CFR2
+ENV CFR3
+ENV TAILSCALE_HOSTNAME
+ENV TAILSCALE_AUTHKEY
 USER root
 # RUN apt install -y ca-certificates bash curl
 COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template

@@ -7,6 +7,9 @@ SECRET ENV CFR2
 SECRET ENV CFR3
 SECRET ENV CFV6
 SECRET ENV PORT
+SECRET ENV TAILSCALE_HOSTNAME
+SECRET ENV TAILSCALE_AUTHKEY
+
 # To note: Layerfiles create entire VMs, *not* containers!
 
 # install the latest version of Docker, as in the official Docker installation tutorial.

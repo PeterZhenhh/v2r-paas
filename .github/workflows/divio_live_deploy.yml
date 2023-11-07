@@ -1,0 +1,20 @@
+name: Deploy Live
+
+on:
+  pull_request:
+types: [closed]
+branches:
+  - main
+
+jobs:
+  deploy:
+    name: Deploy
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Deploy live app
+        run: |
+          curl -X POST --data "environment=${{ secrets.DIVIO_LIVE_ENVIRONMENT_UUID }}" --header “Authorization: Token ${{ secrets.DIVIO_API_TOKEN }}" https://api.divio.com/apps/v3/deployments/

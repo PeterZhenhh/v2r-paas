@@ -35,6 +35,6 @@ COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscaled /app/
 COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscale /app/tailscale
 RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 
-CMD ["sh", "/configure.sh"]
-EXPOSE 80
-# ENTRYPOINT ["sh", "/configure.sh"]
+# CMD ["sh", "/configure.sh"]
+# EXPOSE 80
+ENTRYPOINT ["sh", "/configure.sh"]

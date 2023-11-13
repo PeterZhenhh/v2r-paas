@@ -71,18 +71,25 @@ proxyServer.on("upgrade", function(req, socket, head) {
   });
 });
 
-proxy.on('proxyReq', function(proxyReq, req, res, options) {
-  if (req.headers['x-forwarded-for']) {
-    console.log(req.headers['x-forwarded-for'] + " (" + req.headers.host + ") -->" + (proxyReq.host || proxyReq.socket._host) + (proxyReq.path || ""))
-  }
+// 出站  WEB回源
+proxy.on('proxyReq', function (proxyReq, req, res, options) {
+    if (req.headers['x-forwarded-for']) {
+        console.log("WEB " + req.headers['x-forwarded-for'] + " (" + req.headers.host + ") --> " + (proxyReq.host || proxyReq.socket._host) + (proxyReq.path || ""))
+    }
 });
 
-// Listen for the `proxyRes` event on `proxy`.
-proxy.on('proxyRes', function(proxyRes, req, res) {
-  http.IncomingMessage
-  if (req.headers['x-forwarded-for']) {
-    console.log(req.headers['x-forwarded-for'] + " (" + req.headers.host + ") <-- " + proxyRes.socket.remoteAddress + ":" + proxyRes.socket.remotePort)
-  }
+// 出站  WS回源
+proxy.on('proxyReqWs', function (proxyReq, req, res, options) {
+    if (req.headers['x-forwarded-for']) {
+        console.log("WSS " + req.headers['x-forwarded-for'] + " (" + req.headers.host + ") --> " + (proxyReq.host || proxyReq.socket._host) + (proxyReq.path || ""))
+    }
+});
+
+// 入站  回源
+proxy.on('proxyRes', function (proxyRes, req, res) {
+    if (req.headers['x-forwarded-for']) {
+        console.log("WEB " + req.headers['x-forwarded-for'] + " (" + req.headers.host + ") <-- " + proxyRes.socket.remoteAddress + ":" + proxyRes.socket.remotePort + " (" + proxyRes.socket.servername + ")")
+    }
 });
 
 process.on('uncaughtException', function(err) {

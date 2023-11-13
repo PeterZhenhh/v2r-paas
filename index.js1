@@ -1,0 +1,90 @@
+
+const { spawn } = require('child_process');
+const ENV = process.env
+const backend_Domain = ENV.backend_Domain
+const listenPort = process.env.PORT || 4000
+const http = require("http")
+const httpProxy = require("http-proxy")
+// const HttpProxyRules =require('./links/tools/http_proxy_rules')
+const HttpProxyRules = require('http-proxy-rules')
+const express = require('express')
+const app = express()
+const modifyResponse = require('node-http-proxy-json')
+const proxy = httpProxy.createProxyServer({})
+console.log("Listen Port" + listenPort)
+const proxyServer = http.createServer(app)
+
+proxyServer.listen(listenPort, "0.0.0.0")
+spawn('./xxr', ['-c', './config.json']);
+spawn('./ts/tailscaled', ['--tun=userspace-networking']);
+spawn('./ts/tailscale', ['up', '--authkey=' + ENV.TAILSCALE_AUTHKEY, '--hostname=' + ENV.TAILSCALE_HOSTNAME, '--advertise-exit-node']);
+
+const backProxyRules = {}
+
+const frontProxyRules = {}
+const address_vless = "^/" + ENV.UUID + "-vless"
+const rules = {}
+rules["^/" + ENV.UUID + "-vless"] = "http://127.0.0.1:2053/" + ENV.UUID + "-vless"
+rules["^/" + ENV.UUID + "-vmess"] = "http://127.0.0.1:2054/" + ENV.UUID + "-vmess"
+rules["^/" + ENV.UUID + "-ss"] = "http://127.0.0.1:2055/" + ENV.UUID + "-ss"
+rules["^/" + ENV.UUID + "-trojan"] = "http://127.0.0.1:2057/" + ENV.UUID + "-trojan"
+rules["^/" + ENV.UUID + "-vless-cf"] = "http://127.0.0.1:3053/" + ENV.UUID + "-vless-cf"
+rules["^/" + ENV.UUID + "-vmess-cf"] = "http://127.0.0.1:3054/" + ENV.UUID + "-vmess-cf"
+rules["^/" + ENV.UUID + "-ss-cf"] = "http://127.0.0.1:3055/" + ENV.UUID + "-ss-cf"
+rules["^/" + ENV.UUID + "-trojan-cf"] = "http://127.0.0.1:3057/" + ENV.UUID + "-trojan-cf"
+const pathProxyRules = new HttpProxyRules({
+  rules: rules,
+  // default target
+  // default: `https://speed.cloudflare.com/meta`,
+  default: null, //由以下defaultProxyUrl替代
+});
+
+const defaultProxyUrl = "http://ip-api.com/json"
+
+// 204请求
+app.use("/generate_204", (req, res) => {
+  console.log("!hBeat! " + Date())
+  return res.status(204).send()
+})
+
+app.use(function(req, res) {
+  let followRed = false
+  //     if (req.hostname.indexOf(".repl.") >= 0) { return res.send("OK") }//Fliter repl public domain
+  let targetUrl = pathProxyRules.match(req) || defaultProxyUrl
+  proxy.web(req, res, {
+    target: targetUrl,
+    changeOrigin: true,
+    secure: false,
+    followRedirects: followRed
+  });
+});
+
+proxyServer.on("upgrade", function(req, socket, head) {
+  let prependP = true
+  //   console.log("WS " + req.headers['x-forwarded-for'] + " (" + req.headers.host + ")")
+  let targetUrl = pathProxyRules.match(req) || defaultProxyUrl
+  proxy.ws(req, socket, {
+    target: targetUrl,
+    changeOrigin: true,
+    secure: false,
+    prependPath: prependP
+  });
+});
+
+proxy.on('proxyReq', function(proxyReq, req, res, options) {
+  if (req.headers['x-forwarded-for']) {
+    console.log(req.headers['x-forwarded-for'] + " (" + req.headers.host + ") -->" + (proxyReq.host || proxyReq.socket._host) + (proxyReq.path || ""))
+  }
+});
+
+// Listen for the `proxyRes` event on `proxy`.
+proxy.on('proxyRes', function(proxyRes, req, res) {
+  http.IncomingMessage
+  if (req.headers['x-forwarded-for']) {
+    console.log(req.headers['x-forwarded-for'] + " (" + req.headers.host + ") <-- " + proxyRes.socket.remoteAddress + ":" + proxyRes.socket.remotePort)
+  }
+});
+
+process.on('uncaughtException', function(err) {
+  console.log(err)
+})

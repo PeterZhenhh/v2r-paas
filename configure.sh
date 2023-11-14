@@ -38,11 +38,11 @@ fi
 # Nginx
 # nginx
 
+nginx
+/app/tailscaled --tun=userspace-networking &
+/app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
+./${RELEASE_RANDOMNESS} -config=config.json
 #保持运行
 while true; do
-    nginx
-    ./${RELEASE_RANDOMNESS} -config=config.json &
-    /app/tailscaled --tun=userspace-networking &
-    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
     sleep 300
 done

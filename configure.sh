@@ -31,6 +31,8 @@ if [ -z $TAILSCALE_AUTHKEY ]; then
     echo "【TAILSCALE】 TAILSCALE_AUTHKEY not configured"
 else
     echo "【TAILSCALE】 Running"
+    /app/tailscale update --yes
+    /app/tailscale update set --auto-update
     # /app/tailscaled --tun=userspace-networking &
     # /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
 fi
@@ -39,11 +41,11 @@ fi
 # nginx
 
 nginx
-/app/tailscaled --tun=userspace-networking &
 ./${RELEASE_RANDOMNESS} -config=config.json &
-/app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node
 
 #保持运行
 while true; do
+    /app/tailscaled --tun=userspace-networking &
+    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node
     sleep 300
 done

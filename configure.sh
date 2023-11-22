@@ -41,11 +41,32 @@ fi
 # nginx
 
 nginx
-./${RELEASE_RANDOMNESS} -config=config.json &
+# ./${RELEASE_RANDOMNESS} -config=config.json &
 
 #保持运行
+# while true; do
+#     /app/tailscaled --tun=userspace-networking &
+#     /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node
+#     sleep 300
+# done
+
 while true; do
-    /app/tailscaled --tun=userspace-networking &
-    /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node
-    sleep 300
+    NUM=$(ps aux | grep ${RELEASE_RANDOMNESS} | grep -v grep | wc -l)
+    if [ "${NUM}" -lt "1" ]; then
+        echo "【V2r】重启"
+        nohup ./${RELEASE_RANDOMNESS} -config=config.json >>./v2r.log &
+        cat ./v2r.log
+    fi
+
+    NUM=$(ps aux | grep tailscaled | grep -v grep | wc -l)
+    if [ "${NUM}" -lt "1" ]; then
+        echo "【Tailscaled】重启"
+        nohup /app/tailscaled --tun=userspace-networking >>./tailscaled.log &
+        cat ./tailscaled.log
+        nohup /app/tailscale update --yes >>./tailscale.log &
+        nohup /app/tailscale update set --auto-update >>./tailscale.log &
+        nohup /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node >>./tailscale.log &
+        cat ./tailscale.log
+    fi
+    sleep 3
 done

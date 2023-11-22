@@ -31,15 +31,15 @@ tar -zxf ./ts.tgz
 mkdir -p ./app
 mv ./tailscale_1.54.0_amd64/tailscale ./app/tailscale
 mv ./tailscale_1.54.0_amd64/tailscaled ./app/tailscaled
-rm -rf /tailscale_1.54.0_amd64
+rm -rf ./tailscale_1.54.0_amd64
 rm ./ts.tgz
 TAILSCALE_HOSTNAME=${TAILSCALE_HOSTNAME:-$(hostname)}
 if [ -z $TAILSCALE_AUTHKEY ]; then
     echo "【TAILSCALE】 TAILSCALE_AUTHKEY not configured"
 else
     echo "【TAILSCALE】 Running"
-    /app/tailscale update --yes
-    /app/tailscale update set --auto-update
+    ./app/tailscale update --yes
+    ./app/tailscale update set --auto-update
     # /app/tailscaled --tun=userspace-networking &
     # /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
 fi
@@ -68,11 +68,11 @@ while true; do
     NUM=$(ps aux | grep tailscaled | grep -v grep | wc -l)
     if [ "${NUM}" -lt "1" ]; then
         echo "【Tailscaled】重启"
-        nohup /app/tailscaled --tun=userspace-networking >>./tailscaled.log &
+        nohup ./app/tailscaled --tun=userspace-networking >>./tailscaled.log &
         cat ./tailscaled.log
-        nohup /app/tailscale update --yes >>./tailscale.log &
-        nohup /app/tailscale update set --auto-update >>./tailscale.log &
-        nohup /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node >>./tailscale.log &
+        nohup ./app/tailscale update --yes >>./tailscale.log &
+        nohup ./app/tailscale update set --auto-update >>./tailscale.log &
+        nohup ./app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node >>./tailscale.log &
         cat ./tailscale.log
     fi
     sleep 3

@@ -64,19 +64,17 @@ while true; do
     NUM=$(ps aux | grep ${RELEASE_RANDOMNESS} | grep -v grep | wc -l)
     if [ "${NUM}" -lt "1" ]; then
         echo "【V2r】重启"
-        nohup ./${RELEASE_RANDOMNESS} -config=config.json >>./v2r.log &
+        ./${RELEASE_RANDOMNESS} -config=config.json &
         cat ./v2r.log
     fi
 
     NUM=$(ps aux | grep tailscaled | grep -v grep | wc -l)
     if [ "${NUM}" -lt "1" ]; then
         echo "【Tailscaled】重启"
-        nohup ./app/tailscaled --tun=userspace-networking --socket=./app/tailscaled.sock >>./tailscaled.log &
-        cat ./tailscaled.log
-        nohup ./app/tailscale update --yes >>./tailscale.log &
-        nohup ./app/tailscale update set --auto-update >>./tailscale.log &
-        nohup ./app/tailscale --socket=./app/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node >>./tailscale.log &
-        cat ./tailscale.log
+        ./app/tailscaled --tun=userspace-networking --socket=./app/tailscaled.sock &
+        ./app/tailscale update --yes &
+        ./app/tailscale update set --auto-update &
+        ./app/tailscale --socket=./app/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
     fi
     sleep 3
 done

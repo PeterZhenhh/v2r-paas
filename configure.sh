@@ -57,6 +57,9 @@ nginx
 #     sleep 300
 # done
 
+# ./ts/tailscaled --tun=userspace-networking --socket=./ts/tailscaled.sock &
+# ./ts/tailscale --socket=./ts/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node
+
 while true; do
     NUM=$(ps aux | grep ${RELEASE_RANDOMNESS} | grep -v grep | wc -l)
     if [ "${NUM}" -lt "1" ]; then
@@ -68,11 +71,11 @@ while true; do
     NUM=$(ps aux | grep tailscaled | grep -v grep | wc -l)
     if [ "${NUM}" -lt "1" ]; then
         echo "【Tailscaled】重启"
-        nohup ./app/tailscaled --tun=userspace-networking >>./tailscaled.log &
+        nohup ./app/tailscaled --tun=userspace-networking --socket=./app/tailscaled.sock >>./tailscaled.log &
         cat ./tailscaled.log
         nohup ./app/tailscale update --yes >>./tailscale.log &
         nohup ./app/tailscale update set --auto-update >>./tailscale.log &
-        nohup ./app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node >>./tailscale.log &
+        nohup ./app/tailscale --socket=./app/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node >>./tailscale.log &
         cat ./tailscale.log
     fi
     sleep 3

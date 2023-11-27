@@ -4,6 +4,7 @@
   },
   "inbounds": [
     {
+      "tag": "in-vless",
       "listen": "127.0.0.1",
       "port": 3000,
       "protocol": "vless",
@@ -25,14 +26,16 @@
         }
       },
       "sniffing": {
-        "enabled": false,
+        "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
+      "tag": "in-vless_grpc",
       "listen": "127.0.0.1",
       "port": 3100,
       "protocol": "vless",
@@ -49,12 +52,20 @@
         "grpcSettings": {
           "serviceName": "$UUID-vless_grpc"
         }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ]
       }
     },
     {
       "tag": "in-vless-cf",
       "listen": "127.0.0.1",
-      "port": 3011,
+      "port": 3010,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -77,14 +88,15 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
       "tag": "in-vless_grpc-cf",
       "listen": "127.0.0.1",
-      "port": 3111,
+      "port": 3110,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -99,9 +111,116 @@
         "grpcSettings": {
           "serviceName": "$UUID-vless_grpc-cf"
         }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ]
       }
     },
     {
+      "tag": "in-vless-tor",
+      "listen": "127.0.0.1",
+      "port": 3001,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "allowInsecure": false,
+        "wsSettings": {
+          "path": "/$UUID-vless-tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-vless_grpc-tor",
+      "listen": "127.0.0.1",
+      "port": 3101,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "$UUID-vless_grpc-tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-vless-cf_tor",
+      "listen": "127.0.0.1",
+      "port": 3011,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "allowInsecure": false,
+        "wsSettings": {
+          "path": "/$UUID-vless-cf_tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-vless_grpc-cf_tor",
+      "listen": "127.0.0.1",
+      "port": 3111,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "$UUID-vless_grpc-cf_tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-vmess",
       "listen": "127.0.0.1",
       "port": 2000,
       "protocol": "vmess",
@@ -126,11 +245,13 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
+      "tag": "in-vmess_grpc",
       "listen": "127.0.0.1",
       "port": 2100,
       "protocol": "vmess",
@@ -154,14 +275,15 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
       "tag": "in-vmess-cf",
       "listen": "127.0.0.1",
-      "port": 2011,
+      "port": 2010,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -184,14 +306,15 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
       "tag": "in-vmess_grpc-cf",
       "listen": "127.0.0.1",
-      "port": 2111,
+      "port": 2110,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -213,11 +336,115 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
+      "tag": "in-vmess-tor",
+      "listen": "127.0.0.1",
+      "port": 2001,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "allowInsecure": false,
+        "wsSettings": {
+          "path": "/$UUID-vmess-tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-vmess_grpc-tor",
+      "listen": "127.0.0.1",
+      "port": 2101,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "$UUID-vmess_grpc-tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-vmess-cf_tor",
+      "listen": "127.0.0.1",
+      "port": 2011,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "allowInsecure": false,
+        "wsSettings": {
+          "path": "/$UUID-vmess-cf_tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-vmess_grpc-cf_tor",
+      "listen": "127.0.0.1",
+      "port": 2111,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "$UUID-vmess_grpc-cf_tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-trojan",
       "listen": "127.0.0.1",
       "port": 4000,
       "protocol": "trojan",
@@ -242,11 +469,13 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
+      "tag": "in-trojan_grpc",
       "listen": "127.0.0.1",
       "port": 4100,
       "protocol": "trojan",
@@ -270,14 +499,15 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
       "tag": "in-trojan-cf",
       "listen": "127.0.0.1",
-      "port": 4011,
+      "port": 4010,
       "protocol": "trojan",
       "settings": {
         "clients": [
@@ -300,14 +530,15 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
       "tag": "in-trojan_grpc-cf",
       "listen": "127.0.0.1",
-      "port": 4111,
+      "port": 4110,
       "protocol": "trojan",
       "settings": {
         "clients": [
@@ -329,11 +560,115 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
+      "tag": "in-trojan-tor",
+      "listen": "127.0.0.1",
+      "port": 4001,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "allowInsecure": false,
+        "wsSettings": {
+          "path": "/$UUID-trojan-tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-trojan_grpc-tor",
+      "listen": "127.0.0.1",
+      "port": 4101,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "$UUID-trojan_grpc-tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-trojan-cf_tor",
+      "listen": "127.0.0.1",
+      "port": 4011,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "allowInsecure": false,
+        "wsSettings": {
+          "path": "/$UUID-trojan-cf_tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-trojan_grpc-cf_tor",
+      "listen": "127.0.0.1",
+      "port": 4111,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "$UUID",
+            "level": 0,
+            "email": "love@v2fly.org"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "$UUID-trojan_grpc-cf_tor"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    },
+    {
+      "tag": "in-ss",
       "listen": "127.0.0.1",
       "port": 5000,
       "protocol": "shadowsocks",
@@ -355,11 +690,13 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
+      "tag": "in-ss_grpc",
       "listen": "127.0.0.1",
       "port": 5100,
       "protocol": "shadowsocks",
@@ -380,14 +717,15 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
       "tag": "in-ss-cf",
       "listen": "127.0.0.1",
-      "port": 5011,
+      "port": 5010,
       "protocol": "shadowsocks",
       "settings": {
         "email": "love@v2fly.org",
@@ -407,14 +745,15 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
       "tag": "in-ss_grpc-cf",
       "listen": "127.0.0.1",
-      "port": 5111,
+      "port": 5110,
       "protocol": "shadowsocks",
       "settings": {
         "email": "love@v2fly.org",
@@ -433,118 +772,99 @@
         "enabled": true,
         "destOverride": [
           "http",
-          "tls"
+          "tls",
+          "quic"
         ]
       }
     },
     {
+      "tag": "in-ss-tor",
       "listen": "127.0.0.1",
-      "port": 6000,
-      "protocol": "socks",
+      "port": 5001,
+      "protocol": "shadowsocks",
       "settings": {
-        "auth": "password",
-        "accounts": [
-          {
-            "user": "$UUID",
-            "pass": "$UUID"
-          }
-        ]
+        "email": "love@v2fly.org",
+        "method": "chacha20-ietf-poly1305",
+        "password": "$UUID",
+        "network": "tcp,udp",
+        "ivCheck": true
       },
       "streamSettings": {
         "network": "ws",
+        "security": "none",
         "wsSettings": {
-          "path": "/$UUID-socks"
+          "path": "/$UUID-ss-tor"
         }
       },
       "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
+        "enabled": false
       }
     },
     {
+      "tag": "in-ss_grpc-tor",
       "listen": "127.0.0.1",
-      "port": 6100,
-      "protocol": "socks",
+      "port": 5101,
+      "protocol": "shadowsocks",
       "settings": {
-        "auth": "password",
-        "accounts": [
-          {
-            "user": "$UUID",
-            "pass": "$UUID"
-          }
-        ]
+        "email": "love@v2fly.org",
+        "method": "chacha20-ietf-poly1305",
+        "password": "$UUID",
+        "network": "tcp,udp",
+        "ivCheck": true
       },
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
-          "serviceName": "$UUID-socks_grpc"
+          "serviceName": "$UUID-ss_grpc_tor"
         }
       },
       "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
+        "enabled": false
       }
     },
     {
-      "tag": "in-s5-cf",
+      "tag": "in-ss-cf_tor",
       "listen": "127.0.0.1",
-      "port": 6011,
-      "protocol": "socks",
+      "port": 5011,
+      "protocol": "shadowsocks",
       "settings": {
-        "auth": "password",
-        "accounts": [
-          {
-            "user": "$UUID",
-            "pass": "$UUID"
-          }
-        ]
+        "email": "love@v2fly.org",
+        "method": "chacha20-ietf-poly1305",
+        "password": "$UUID",
+        "network": "tcp,udp",
+        "ivCheck": true
       },
       "streamSettings": {
         "network": "ws",
+        "security": "none",
         "wsSettings": {
-          "path": "/$UUID-socks-cf"
+          "path": "/$UUID-ss-cf_tor"
         }
       },
       "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
+        "enabled": false
       }
     },
     {
-      "tag": "in-s5_grpc-cf",
+      "tag": "in-ss_grpc-cf_tor",
       "listen": "127.0.0.1",
-      "port": 6111,
-      "protocol": "socks",
+      "port": 5111,
+      "protocol": "shadowsocks",
       "settings": {
-        "auth": "password",
-        "accounts": [
-          {
-            "user": "$UUID",
-            "pass": "$UUID"
-          }
-        ]
+        "email": "love@v2fly.org",
+        "method": "chacha20-ietf-poly1305",
+        "password": "$UUID",
+        "network": "tcp,udp",
+        "ivCheck": true
       },
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
-          "serviceName": "$UUID-socks_grpc-cf"
+          "serviceName": "$UUID-ss_grpc-cf_tor"
         }
       },
       "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
+        "enabled": false
       }
     }
   ],
@@ -556,17 +876,23 @@
         "type": "field",
         "inboundTag": [
           "in-vless-cf",
+          "in-vless-cf_tor",
           "in-vless_grpc-cf",
+          "in-vless_grpc-cf_tor",
           "in-vmess-cf",
+          "in-vmess-cf_tor",
           "in-vmess_grpc-cf",
+          "in-vmess_grpc-cf_tor",
           "in-ss-cf",
+          "in-ss-cf_tor",
           "in-ss_grpc-cf",
-          "in-s5-cf",
-          "in-s5_grpc-cf",
+          "in-ss_grpc-cf_tor",
           "in-trojan-cf",
-          "in-trojan_grpc-cf"
+          "in-trojan-cf_tor",
+          "in-trojan_grpc-cf",
+          "in-trojan_grpc-cf_tor"
         ],
-        "outboundTag": "cf-out"
+        "outboundTag": "out-cf"
       }
     ]
   },
@@ -579,7 +905,7 @@
       }
     },
     {
-      "tag": "cf-out",
+      "tag": "out-cf",
       "protocol": "wireguard",
       "settings": {
         "secretKey": "$CFKEY",
@@ -597,24 +923,21 @@
             "endpoint": "engage.cloudflareclient.com:2408"
           }
         ],
-        "reserved": [0,0,0],
-        "mtu": 1280,
-        "workers": 16
+        "reserved": [
+          0,
+          0,
+          0
+        ]
       }
-    },
-    {
-      "protocol": "blackhole",
-      "tag": "blocked"
     }
   ],
   "dns": {
     "servers": [
       {
-        "address": "https://dns.google/dns-query",
+        "address": "https+local://dns.google/dns-query",
         "skipFallback": true
       }
     ],
-    "queryStrategy": "AsIs",
     "disableCache": true,
     "disableFallbackIfMatch": false
   }

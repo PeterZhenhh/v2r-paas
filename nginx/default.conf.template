@@ -19,7 +19,7 @@ server {
         proxy_pass http://ip-api.com/json;
     }
 
-    # Xray端口=入站代理XX-底层传输Y-出站代理Z-其它N
+    # Xray端口=入站协议XX-底层传输协议Y-出站Z-其它N
 
     # 入站:
     # Dokodemo-Door	=1
@@ -40,16 +40,10 @@ server {
     #
     # 出站:
     # Freedom	=0
-    # Wireguard	=1
-    # Vmess	=2
-    # Vless	=3
-    # Trojan	=4
-    # Shadowsocks	=5
-    # Socks		=6
-    # HTTP	=7
-    # 其它：
-    # 无	=0
     # CFWarp	=1
+    # 其它：
+    # 默认	=0
+    # Tor适配	=1
     #
     location /$UUID-vless {
         proxy_redirect off;
@@ -77,7 +71,7 @@ server {
     location /$UUID-vless-cf {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:3011;
+            proxy_pass http://127.0.0.1:3010;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -89,6 +83,52 @@ server {
     }
 
     location /$UUID-vless_grpc-cf {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:3110;
+        }
+    }
+
+    location /$UUID-vless-tor {
+        proxy_redirect off;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:3001;
+        }
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /$UUID-vless_grpc-tor {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:3101;
+        }
+    }
+
+    location /$UUID-vless-cf_tor {
+        proxy_redirect off;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:3011;
+        }
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /$UUID-vless_grpc-cf_tor {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
@@ -123,7 +163,7 @@ server {
     location /$UUID-vmess-cf {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:2011;
+            proxy_pass http://127.0.0.1:2010;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -135,6 +175,52 @@ server {
     }
 
     location /$UUID-vmess_grpc-cf {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:2110;
+        }
+    }
+
+    location /$UUID-vmess-tor {
+        proxy_redirect off;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:2001;
+        }
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /$UUID-vmess_grpc-tor {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:2101;
+        }
+    }
+
+    location /$UUID-vmess-cf_tor {
+        proxy_redirect off;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:2011;
+        }
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /$UUID-vmess_grpc-cf_tor {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
@@ -169,7 +255,7 @@ server {
     location /$UUID-trojan-cf {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:4011;
+            proxy_pass http://127.0.0.1:4010;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -181,6 +267,52 @@ server {
     }
 
     location /$UUID-trojan_grpc-cf {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:4110;
+        }
+    }
+
+    location /$UUID-trojan-tor {
+        proxy_redirect off;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:4001;
+        }
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /$UUID-trojan_grpc-tor {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:4101;
+        }
+    }
+
+    location /$UUID-trojan-cf_tor {
+        proxy_redirect off;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:4011;
+        }
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /$UUID-trojan_grpc-cf_tor {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;
@@ -215,7 +347,7 @@ server {
     location /$UUID-ss-cf {
         proxy_redirect off;
         if ($http_upgrade = "websocket") {
-            proxy_pass http://127.0.0.1:5011;
+            proxy_pass http://127.0.0.1:5010;
         }
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -227,6 +359,52 @@ server {
     }
 
     location /$UUID-ss_grpc-cf {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:5110;
+        }
+    }
+
+    location /$UUID-ss-tor {
+        proxy_redirect off;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:5001;
+        }
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /$UUID-ss_grpc-tor {
+        client_max_body_size 0;
+        client_body_timeout 1071906480m;
+        grpc_read_timeout 1071906480m;
+        if ($http_content_type = "application/grpc") {
+            grpc_pass grpc://127.0.0.1:5101;
+        }
+    }
+
+    location /$UUID-ss-cf_tor {
+        proxy_redirect off;
+        if ($http_upgrade = "websocket") {
+            proxy_pass http://127.0.0.1:5011;
+        }
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        # Show real IP in v2ray access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /$UUID-ss_grpc-cf_tor {
         client_max_body_size 0;
         client_body_timeout 1071906480m;
         grpc_read_timeout 1071906480m;

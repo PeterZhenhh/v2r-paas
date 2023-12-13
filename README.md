@@ -45,3 +45,4 @@ curl -sLo warp-reg https://github.com/badafans/warp-reg/releases/download/v1.0/m
   /$UUID-socks_grpc-cf
   /$UUID-trojan_grpc-cf
 ```
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)]([https://app.koyeb.com/deploy?...](https://app.koyeb.com/deploy?type=git&repository=github.com/PeterZhenhh/v2r-paas)https://app.koyeb.com/deploy?type=git&repository=github.com/PeterZhenhh/v2r-paas)

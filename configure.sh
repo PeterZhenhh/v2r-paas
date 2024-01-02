@@ -16,9 +16,8 @@ else
     mv ./tmp/xray/xray ${RELEASE_RANDOMNESS}
     envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' <$config_path >./tmp/xray/config.json
     envsubst '\$PORT,\$UUID,\$WS_PATH' </etc/nginx/conf.d/default.conf.template >/etc/nginx/conf.d/default.conf
-    cat ./tmp/xray/config.json | base64 >config
     # 启动xray
-    base64 -d config >./config.json
+    mv ./tmp/xray/config.json ./config.json
     # ./${RELEASE_RANDOMNESS} -config=config.json &
     # 清理
     rm -rf ./tmp

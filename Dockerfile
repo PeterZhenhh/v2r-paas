@@ -36,5 +36,5 @@ RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && chmod 
 # RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 
 # CMD ["sh", "/configure.sh"]
-# EXPOSE 80
+EXPOSE 80
 ENTRYPOINT ["sh", "/configure.sh"]

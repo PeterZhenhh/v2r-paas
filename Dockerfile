@@ -1,4 +1,4 @@
-FROM nginx:stable-alpine
+FROM nginx:stable-alpine AS builder
 ARG TZ=Asia/Shanghai
 ARG UUID
 ARG PORT

@@ -13,36 +13,8 @@
 |  TAILSCALE_HOSTNAME |  xxx-app | tailscale设备名  |
 |  TAILSCALE_AUTHKEY |  tskey-auth-xxx | tailscale授权密钥  |
 
-### 服务端入站(普通)
-
-```
-  /$UUID-vless
-  /$UUID-vmess
-  /$UUID-ss
-  /$UUID-socks
-  /$UUID-trojan
-  /$UUID-vless_grpc
-  /$UUID-vmess_grpc
-  /$UUID-ss_grpc
-  /$UUID-socks_grpc
-  /$UUID-trojan_grpc
-```
-
-### 服务端入站(CF WARP)
 #### 使用 warp-reg，注册warp
 ```
 curl -sLo warp-reg https://github.com/badafans/warp-reg/releases/download/v1.0/main-linux-amd64 && chmod +x warp-reg && ./warp-reg
-```
-```
-  /$UUID-vless-cf
-  /$UUID-vmess-cf
-  /$UUID-ss-cf
-  /$UUID-socks-cf
-  /$UUID-trojan-cf
-  /$UUID-vless_grpc-cf
-  /$UUID-vmess_grpc-cf
-  /$UUID-ss_grpc-cf
-  /$UUID-socks_grpc-cf
-  /$UUID-trojan_grpc-cf
 ```
 [![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/PeterZhenhh/v2r-paas)

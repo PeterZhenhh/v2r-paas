@@ -72,7 +72,7 @@ while true; do
         echo "【Tailscaled】重启"
         ./app/tailscaled --tun=userspace-networking --socket=./app/tailscaled.sock &
         ./app/tailscale update --yes &
-        ./app/tailscale update set --auto-update &
+        ./app/tailscale --socket=./app/tailscaled.sock set --auto-update &
         ./app/tailscale --socket=./app/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
     fi
     sleep 3

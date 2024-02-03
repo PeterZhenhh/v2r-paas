@@ -1,7 +1,8 @@
 #!/bin/sh
+nginx
+
 # Cloudflare Warp
 curl -sLo warp-reg https://github.com/badafans/warp-reg/releases/download/v1.0/main-linux-amd64 && chmod +x warp-reg && ./warp-reg
-
 # Xray
 if [ -z $UUID ]; then
     echo "【XRAY】 UUID未配置"
@@ -25,17 +26,17 @@ else
 fi
 
 # Tailscale
-wget -O ./ts.tgz https://pkgs.tailscale.com/stable/tailscale_1.54.0_amd64.tgz
-tar -zxf ./ts.tgz
-mkdir -p ./app
-mv ./tailscale_1.54.0_amd64/tailscale ./app/tailscale
-mv ./tailscale_1.54.0_amd64/tailscaled ./app/tailscaled
-rm -rf ./tailscale_1.54.0_amd64
-rm ./ts.tgz
-TAILSCALE_HOSTNAME=${TAILSCALE_HOSTNAME:-$(hostname)}
 if [ -z $TAILSCALE_AUTHKEY ]; then
     echo "【TAILSCALE】 TAILSCALE_AUTHKEY not configured"
 else
+    wget -O ./ts.tgz https://pkgs.tailscale.com/stable/tailscale_1.54.0_amd64.tgz
+    tar -zxf ./ts.tgz
+    mkdir -p ./app
+    mv ./tailscale_1.54.0_amd64/tailscale ./app/tailscale
+    mv ./tailscale_1.54.0_amd64/tailscaled ./app/tailscaled
+    rm -rf ./tailscale_1.54.0_amd64
+    rm ./ts.tgz
+    TAILSCALE_HOSTNAME=${TAILSCALE_HOSTNAME:-$(hostname)}
     echo "【TAILSCALE】 Running"
     ./app/tailscale update --yes
     ./app/tailscale update set --auto-update
@@ -46,7 +47,6 @@ fi
 # Nginx
 # nginx
 
-nginx
 # ./${RELEASE_RANDOMNESS} -config=config.json &
 
 #保持运行
@@ -60,20 +60,24 @@ nginx
 # ./ts/tailscale --socket=./ts/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node
 
 while true; do
-    NUM=$(ps aux | grep ${RELEASE_RANDOMNESS} | grep -v grep | wc -l)
-    if [ "${NUM}" -lt "1" ]; then
-        echo "【V2r】重启"
-        ./${RELEASE_RANDOMNESS} -config=config.json &
-        cat ./v2r.log
+    nginx
+    if [! -z $UUID ]; then
+        NUM=$(ps aux | grep ${RELEASE_RANDOMNESS} | grep -v grep | wc -l)
+        if [ "${NUM}" -lt "1" ]; then
+            echo "【V2r】重启"
+            ./${RELEASE_RANDOMNESS} -config=config.json &
+            cat ./v2r.log
+        fi
     fi
-
-    NUM=$(ps aux | grep tailscaled | grep -v grep | wc -l)
-    if [ "${NUM}" -lt "1" ]; then
-        echo "【Tailscaled】重启"
-        ./app/tailscaled --tun=userspace-networking --socket=./app/tailscaled.sock &
-        # ./app/tailscale update --yes &
-        ./app/tailscale --socket=./app/tailscaled.sock set --auto-update &
-        ./app/tailscale --socket=./app/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
+    if [! -z $TAILSCALE_AUTHKEY ]; then
+        NUM=$(ps aux | grep tailscaled | grep -v grep | wc -l)
+        if [ "${NUM}" -lt "1" ]; then
+            echo "【Tailscaled】重启"
+            ./app/tailscaled --tun=userspace-networking --socket=./app/tailscaled.sock &
+            ./app/tailscale update --yes &
+            ./app/tailscale --socket=./app/tailscaled.sock set --auto-update &
+            ./app/tailscale --socket=./app/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
+        fi
     fi
     sleep 3
 done

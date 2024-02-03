@@ -60,8 +60,8 @@ fi
 # ./ts/tailscale --socket=./ts/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node
 
 while true; do
-    nginx
-    if [! -z $UUID ]; then
+    # nginx
+    if [ ! -z $UUID ]; then
         NUM=$(ps aux | grep ${RELEASE_RANDOMNESS} | grep -v grep | wc -l)
         if [ "${NUM}" -lt "1" ]; then
             echo "【V2r】重启"
@@ -69,7 +69,7 @@ while true; do
             cat ./v2r.log
         fi
     fi
-    if [! -z $TAILSCALE_AUTHKEY ]; then
+    if [ ! -z $TAILSCALE_AUTHKEY ]; then
         NUM=$(ps aux | grep tailscaled | grep -v grep | wc -l)
         if [ "${NUM}" -lt "1" ]; then
             echo "【Tailscaled】重启"

@@ -1,5 +1,4 @@
 #!/bin/sh
-nginx
 
 # Cloudflare Warp
 curl -sLo warp-reg https://github.com/badafans/warp-reg/releases/download/v1.0/main-linux-amd64 && chmod +x warp-reg && ./warp-reg
@@ -17,6 +16,7 @@ else
     mv ./tmp/xray/xray ${RELEASE_RANDOMNESS}
     envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' <$config_path >./tmp/xray/config.json
     envsubst '\$PORT,\$UUID,\$WS_PATH' </etc/nginx/conf.d/default.conf.template >/etc/nginx/conf.d/default.conf
+    nginx
     # 启动xray
     mv ./tmp/xray/config.json ./config.json
     # ./${RELEASE_RANDOMNESS} -config=config.json &
@@ -38,10 +38,10 @@ else
     rm ./ts.tgz
     TAILSCALE_HOSTNAME=${TAILSCALE_HOSTNAME:-$(hostname)}
     echo "【TAILSCALE】 Running"
-    ./app/tailscale update --yes
-    ./app/tailscale update set --auto-update
-    # /app/tailscaled --tun=userspace-networking &
-    # /app/tailscale up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
+    ./app/tailscaled --tun=userspace-networking --socket=./app/tailscaled.sock &
+    ./app/tailscale update --yes &
+    ./app/tailscale --socket=./app/tailscaled.sock set --auto-update &
+    ./app/tailscale --socket=./app/tailscaled.sock up --authkey=$TAILSCALE_AUTHKEY --hostname=$TAILSCALE_HOSTNAME --advertise-exit-node &
 fi
 
 # Nginx

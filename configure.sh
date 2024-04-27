@@ -29,12 +29,9 @@ fi
 if [ -z $TAILSCALE_AUTHKEY ]; then
     echo "【TAILSCALE】 TAILSCALE_AUTHKEY not configured"
 else
-    wget -O ./ts.tgz https://pkgs.tailscale.com/stable/tailscale_1.54.0_amd64.tgz
-    tar -zxf ./ts.tgz
     mkdir -p ./app
-    mv ./tailscale_1.54.0_amd64/tailscale ./app/tailscale
-    mv ./tailscale_1.54.0_amd64/tailscaled ./app/tailscaled
-    rm -rf ./tailscale_1.54.0_amd64
+    wget -O ./ts.tgz https://pkgs.tailscale.com/stable/tailscale_latest_amd64.tgz
+    tar -xf ./ts.tgz -C ./app --strip-components=1
     rm ./ts.tgz
     TAILSCALE_HOSTNAME=${TAILSCALE_HOSTNAME:-$(hostname)}
     echo "【TAILSCALE】 Running"

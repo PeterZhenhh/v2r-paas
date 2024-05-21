@@ -2,9 +2,45 @@
     "log": {
         "loglevel": "info"
     },
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "domainMatcher": "mph",
+        "rules": [
+            {
+                "type": "field",
+                "inboundTag": [
+                    "in-vless_ws-cf",
+                    "in-vless_ws_tor-cf",
+                    "in-vless_grpc-cf",
+                    "in-vless_grpc_tor-cf",
+                    "in-vless_hu-cf",
+                    "in-vless_hu_tor-cf",
+                    "in-vmess_ws-cf",
+                    "in-vmess_ws_tor-cf",
+                    "in-vmess_grpc-cf",
+                    "in-vmess_grpc_tor-cf",
+                    "in-vmess_hu-cf",
+                    "in-vmess_hu_tor-cf",
+                    "in-ss_ws-cf",
+                    "in-ss_ws_tor-cf",
+                    "in-ss_grpc-cf",
+                    "in-ss_grpc_tor-cf",
+                    "in-ss_hu-cf",
+                    "in-ss_hu_tor-cf",
+                    "in-trojan_ws-cf",
+                    "in-trojan_ws_tor-cf",
+                    "in-trojan_grpc-cf",
+                    "in-trojan_grpc_tor-cf",
+                    "in-trojan_hu-cf",
+                    "in-trojan_hu_tor-cf"
+                ],
+                "outboundTag": "out-cf"
+            }
+        ]
+    },
     "inbounds": [
         {
-            "tag": "in-vless",
+            "tag": "in-vless_ws",
             "listen": "127.0.0.1",
             "port": 3000,
             "protocol": "vless",
@@ -22,7 +58,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-vless"
+                    "path": "/$UUID-vless_ws"
                 }
             },
             "sniffing": {
@@ -63,7 +99,37 @@
             }
         },
         {
-            "tag": "in-vless-cf",
+            "tag": "in-vless_hu",
+            "listen": "127.0.0.1",
+            "port": 3600,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-vless_hu"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "in-vless_ws-cf",
             "listen": "127.0.0.1",
             "port": 3010,
             "protocol": "vless",
@@ -81,7 +147,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-vless-cf"
+                    "path": "/$UUID-vless_ws-cf"
                 }
             },
             "sniffing": {
@@ -122,7 +188,37 @@
             }
         },
         {
-            "tag": "in-vless-tor",
+            "tag": "in-vless_hu-cf",
+            "listen": "127.0.0.1",
+            "port": 3610,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-vless_hu-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "in-vless_ws_tor",
             "listen": "127.0.0.1",
             "port": 3001,
             "protocol": "vless",
@@ -140,7 +236,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-vless-tor"
+                    "path": "/$UUID-vless_ws_tor"
                 }
             },
             "sniffing": {
@@ -148,7 +244,7 @@
             }
         },
         {
-            "tag": "in-vless_grpc-tor",
+            "tag": "in-vless_grpc_tor",
             "listen": "127.0.0.1",
             "port": 3101,
             "protocol": "vless",
@@ -163,7 +259,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "$UUID-vless_grpc-tor"
+                    "serviceName": "$UUID-vless_grpc_tor"
                 }
             },
             "sniffing": {
@@ -171,7 +267,33 @@
             }
         },
         {
-            "tag": "in-vless-cf_tor",
+            "tag": "in-vless_hu_tor",
+            "listen": "127.0.0.1",
+            "port": 3601,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "allowInsecure": false,
+                "wsSettings": {
+                    "path": "/$UUID-vless_hu_tor"
+                }
+            },
+            "sniffing": {
+                "enabled": false
+            }
+        },
+        {
+            "tag": "in-vless_ws_tor-cf",
             "listen": "127.0.0.1",
             "port": 3011,
             "protocol": "vless",
@@ -189,7 +311,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-vless-cf_tor"
+                    "path": "/$UUID-vless_ws_tor-cf"
                 }
             },
             "sniffing": {
@@ -197,7 +319,7 @@
             }
         },
         {
-            "tag": "in-vless_grpc-cf_tor",
+            "tag": "in-vless_grpc_tor-cf",
             "listen": "127.0.0.1",
             "port": 3111,
             "protocol": "vless",
@@ -212,7 +334,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "$UUID-vless_grpc-cf_tor"
+                    "serviceName": "$UUID-vless_grpc_tor-cf"
                 }
             },
             "sniffing": {
@@ -220,7 +342,32 @@
             }
         },
         {
-            "tag": "in-vmess",
+            "tag": "in-vless_hu_tor-cf",
+            "listen": "127.0.0.1",
+            "port": 3611,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-vless_hu_tor-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": false
+            }
+        },
+        {
+            "tag": "in-vmess_ws",
             "listen": "127.0.0.1",
             "port": 2000,
             "protocol": "vmess",
@@ -238,7 +385,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-vmess"
+                    "path": "/$UUID-vmess_ws"
                 }
             },
             "sniffing": {
@@ -281,7 +428,37 @@
             }
         },
         {
-            "tag": "in-vmess-cf",
+            "tag": "in-vmess_hu",
+            "listen": "127.0.0.1",
+            "port": 2600,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-vmess_hu"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "in-vmess_ws-cf",
             "listen": "127.0.0.1",
             "port": 2010,
             "protocol": "vmess",
@@ -299,7 +476,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-vmess-cf"
+                    "path": "/$UUID-vmess_ws-cf"
                 }
             },
             "sniffing": {
@@ -342,7 +519,37 @@
             }
         },
         {
-            "tag": "in-vmess-tor",
+            "tag": "in-vmess_hu-cf",
+            "listen": "127.0.0.1",
+            "port": 2610,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-vmess_hu-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "in-vmess_ws_tor",
             "listen": "127.0.0.1",
             "port": 2001,
             "protocol": "vmess",
@@ -360,7 +567,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-vmess-tor"
+                    "path": "/$UUID-vmess_ws_tor"
                 }
             },
             "sniffing": {
@@ -368,7 +575,7 @@
             }
         },
         {
-            "tag": "in-vmess_grpc-tor",
+            "tag": "in-vmess_grpc_tor",
             "listen": "127.0.0.1",
             "port": 2101,
             "protocol": "vmess",
@@ -385,7 +592,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "$UUID-vmess_grpc-tor"
+                    "serviceName": "$UUID-vmess_grpc_tor"
                 }
             },
             "sniffing": {
@@ -393,7 +600,32 @@
             }
         },
         {
-            "tag": "in-vmess-cf_tor",
+            "tag": "in-vmess_hu_tor",
+            "listen": "127.0.0.1",
+            "port": 2601,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-vmess_hu_tor"
+                }
+            },
+            "sniffing": {
+                "enabled": false
+            }
+        },
+        {
+            "tag": "in-vmess_ws_tor-cf",
             "listen": "127.0.0.1",
             "port": 2011,
             "protocol": "vmess",
@@ -411,7 +643,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-vmess-cf_tor"
+                    "path": "/$UUID-vmess_ws_tor-cf"
                 }
             },
             "sniffing": {
@@ -419,7 +651,7 @@
             }
         },
         {
-            "tag": "in-vmess_grpc-cf_tor",
+            "tag": "in-vmess_grpc_tor-cf",
             "listen": "127.0.0.1",
             "port": 2111,
             "protocol": "vmess",
@@ -436,7 +668,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "$UUID-vmess_grpc-cf_tor"
+                    "serviceName": "$UUID-vmess_grpc_tor-cf"
                 }
             },
             "sniffing": {
@@ -444,7 +676,32 @@
             }
         },
         {
-            "tag": "in-trojan",
+            "tag": "in-vmess_hu_tor-cf",
+            "listen": "127.0.0.1",
+            "port": 2611,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-vmess_hu_tor-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": false
+            }
+        },
+        {
+            "tag": "in-trojan_ws",
             "listen": "127.0.0.1",
             "port": 4000,
             "protocol": "trojan",
@@ -462,7 +719,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-trojan"
+                    "path": "/$UUID-trojan_ws"
                 }
             },
             "sniffing": {
@@ -505,7 +762,37 @@
             }
         },
         {
-            "tag": "in-trojan-cf",
+            "tag": "in-trojan_hu",
+            "listen": "127.0.0.1",
+            "port": 4600,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-trojan_hu"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "in-trojan_ws-cf",
             "listen": "127.0.0.1",
             "port": 4010,
             "protocol": "trojan",
@@ -523,7 +810,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-trojan-cf"
+                    "path": "/$UUID-trojan_ws-cf"
                 }
             },
             "sniffing": {
@@ -566,7 +853,37 @@
             }
         },
         {
-            "tag": "in-trojan-tor",
+            "tag": "in-trojan_hu-cf",
+            "listen": "127.0.0.1",
+            "port": 4610,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-trojan_hu-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "in-trojan_ws_tor",
             "listen": "127.0.0.1",
             "port": 4001,
             "protocol": "trojan",
@@ -584,7 +901,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-trojan-tor"
+                    "path": "/$UUID-trojan_ws_tor"
                 }
             },
             "sniffing": {
@@ -592,7 +909,7 @@
             }
         },
         {
-            "tag": "in-trojan_grpc-tor",
+            "tag": "in-trojan_grpc_tor",
             "listen": "127.0.0.1",
             "port": 4101,
             "protocol": "trojan",
@@ -609,7 +926,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "$UUID-trojan_grpc-tor"
+                    "serviceName": "$UUID-trojan_grpc_tor"
                 }
             },
             "sniffing": {
@@ -617,7 +934,32 @@
             }
         },
         {
-            "tag": "in-trojan-cf_tor",
+            "tag": "in-trojan_hu_tor",
+            "listen": "127.0.0.1",
+            "port": 4601,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-trojan_hu_tor"
+                }
+            },
+            "sniffing": {
+                "enabled": false
+            }
+        },
+        {
+            "tag": "in-trojan_ws_tor-cf",
             "listen": "127.0.0.1",
             "port": 4011,
             "protocol": "trojan",
@@ -635,7 +977,7 @@
                 "network": "ws",
                 "allowInsecure": false,
                 "wsSettings": {
-                    "path": "/$UUID-trojan-cf_tor"
+                    "path": "/$UUID-trojan_ws_tor-cf"
                 }
             },
             "sniffing": {
@@ -643,7 +985,7 @@
             }
         },
         {
-            "tag": "in-trojan_grpc-cf_tor",
+            "tag": "in-trojan_grpc_tor-cf",
             "listen": "127.0.0.1",
             "port": 4111,
             "protocol": "trojan",
@@ -660,7 +1002,7 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "$UUID-trojan_grpc-cf_tor"
+                    "serviceName": "$UUID-trojan_grpc_tor-cf"
                 }
             },
             "sniffing": {
@@ -668,7 +1010,32 @@
             }
         },
         {
-            "tag": "in-ss",
+            "tag": "in-trojan_hu_tor-cf",
+            "listen": "127.0.0.1",
+            "port": 4611,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-trojan_hu_tor-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": false
+            }
+        },
+        {
+            "tag": "in-ss_ws",
             "listen": "127.0.0.1",
             "port": 5000,
             "protocol": "shadowsocks",
@@ -683,7 +1050,7 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "path": "/$UUID-ss"
+                    "path": "/$UUID-ss_ws"
                 }
             },
             "sniffing": {
@@ -723,7 +1090,34 @@
             }
         },
         {
-            "tag": "in-ss-cf",
+            "tag": "in-ss_ws",
+            "listen": "127.0.0.1",
+            "port": 5600,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-ss_ws"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "in-ss_ws-cf",
             "listen": "127.0.0.1",
             "port": 5010,
             "protocol": "shadowsocks",
@@ -738,7 +1132,7 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "path": "/$UUID-ss-cf"
+                    "path": "/$UUID-ss_ws-cf"
                 }
             },
             "sniffing": {
@@ -778,7 +1172,34 @@
             }
         },
         {
-            "tag": "in-ss-tor",
+            "tag": "in-ss_hu-cf",
+            "listen": "127.0.0.1",
+            "port": 5610,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-ss_hu-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
+            "tag": "in-ss_ws_tor",
             "listen": "127.0.0.1",
             "port": 5001,
             "protocol": "shadowsocks",
@@ -793,7 +1214,7 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "path": "/$UUID-ss-tor"
+                    "path": "/$UUID-ss_ws_tor"
                 }
             },
             "sniffing": {
@@ -801,7 +1222,7 @@
             }
         },
         {
-            "tag": "in-ss_grpc-tor",
+            "tag": "in-ss_grpc_tor",
             "listen": "127.0.0.1",
             "port": 5101,
             "protocol": "shadowsocks",
@@ -823,7 +1244,29 @@
             }
         },
         {
-            "tag": "in-ss-cf_tor",
+            "tag": "in-ss_hu_tor",
+            "listen": "127.0.0.1",
+            "port": 5601,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-ss_hu_tor"
+                }
+            },
+            "sniffing": {
+                "enabled": false
+            }
+        },
+        {
+            "tag": "in-ss_ws_tor-cf",
             "listen": "127.0.0.1",
             "port": 5011,
             "protocol": "shadowsocks",
@@ -838,7 +1281,7 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "path": "/$UUID-ss-cf_tor"
+                    "path": "/$UUID-ss_ws_tor-cf"
                 }
             },
             "sniffing": {
@@ -846,7 +1289,7 @@
             }
         },
         {
-            "tag": "in-ss_grpc-cf_tor",
+            "tag": "in-ss_grpc_tor-cf",
             "listen": "127.0.0.1",
             "port": 5111,
             "protocol": "shadowsocks",
@@ -860,7 +1303,29 @@
             "streamSettings": {
                 "network": "grpc",
                 "grpcSettings": {
-                    "serviceName": "$UUID-ss_grpc-cf_tor"
+                    "serviceName": "$UUID-ss_grpc_tor-cf"
+                }
+            },
+            "sniffing": {
+                "enabled": false
+            }
+        },
+        {
+            "tag": "in-ss_hu_tor-cf",
+            "listen": "127.0.0.1",
+            "port": 5011,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
+                    "path": "/$UUID-ss_hu_tor-cf"
                 }
             },
             "sniffing": {
@@ -868,34 +1333,6 @@
             }
         }
     ],
-    "routing": {
-        "domainStrategy": "IPIfNonMatch",
-        "domainMatcher": "mph",
-        "rules": [
-            {
-                "type": "field",
-                "inboundTag": [
-                    "in-vless-cf",
-                    "in-vless-cf_tor",
-                    "in-vless_grpc-cf",
-                    "in-vless_grpc-cf_tor",
-                    "in-vmess-cf",
-                    "in-vmess-cf_tor",
-                    "in-vmess_grpc-cf",
-                    "in-vmess_grpc-cf_tor",
-                    "in-ss-cf",
-                    "in-ss-cf_tor",
-                    "in-ss_grpc-cf",
-                    "in-ss_grpc-cf_tor",
-                    "in-trojan-cf",
-                    "in-trojan-cf_tor",
-                    "in-trojan_grpc-cf",
-                    "in-trojan_grpc-cf_tor"
-                ],
-                "outboundTag": "out-cf"
-            }
-        ]
-    },
     "outbounds": [
         {
             "protocol": "freedom",
@@ -935,11 +1372,12 @@
     "dns": {
         "servers": [
             {
-                "address": "8.8.8.8",
+                "address": "https+local://dns.google/dns-query",
                 "skipFallback": true
             }
         ],
         "disableCache": true,
         "disableFallbackIfMatch": false
     }
+    
 }

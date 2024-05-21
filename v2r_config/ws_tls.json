@@ -1,6 +1,6 @@
 {
     "log": {
-        "loglevel": "warning"
+        "loglevel": "info"
     },
     "inbounds": [
         {
@@ -924,9 +924,9 @@
                     }
                 ],
                 "reserved": [
-            $CFR1,
-            $CFR2,
-            $CFR3
+            0,
+            0,
+            0
                 ]
             }
         }

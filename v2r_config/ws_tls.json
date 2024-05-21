@@ -935,7 +935,7 @@
     "dns": {
         "servers": [
             {
-                "address": "https+local://dns.google/dns-query",
+                "address": "https://dns.google/dns-query",
                 "skipFallback": true
             }
         ],

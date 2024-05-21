@@ -2,42 +2,6 @@
     "log": {
         "loglevel": "info"
     },
-    "routing": {
-        "domainStrategy": "IPIfNonMatch",
-        "domainMatcher": "mph",
-        "rules": [
-            {
-                "type": "field",
-                "inboundTag": [
-                    "in-vless_ws-cf",
-                    "in-vless_ws_tor-cf",
-                    "in-vless_grpc-cf",
-                    "in-vless_grpc_tor-cf",
-                    "in-vless_hu-cf",
-                    "in-vless_hu_tor-cf",
-                    "in-vmess_ws-cf",
-                    "in-vmess_ws_tor-cf",
-                    "in-vmess_grpc-cf",
-                    "in-vmess_grpc_tor-cf",
-                    "in-vmess_hu-cf",
-                    "in-vmess_hu_tor-cf",
-                    "in-ss_ws-cf",
-                    "in-ss_ws_tor-cf",
-                    "in-ss_grpc-cf",
-                    "in-ss_grpc_tor-cf",
-                    "in-ss_hu-cf",
-                    "in-ss_hu_tor-cf",
-                    "in-trojan_ws-cf",
-                    "in-trojan_ws_tor-cf",
-                    "in-trojan_grpc-cf",
-                    "in-trojan_grpc_tor-cf",
-                    "in-trojan_hu-cf",
-                    "in-trojan_hu_tor-cf"
-                ],
-                "outboundTag": "out-cf"
-            }
-        ]
-    },
     "inbounds": [
         {
             "tag": "in-vless_ws",
@@ -282,9 +246,8 @@
                 "decryption": "none"
             },
             "streamSettings": {
-                "network": "ws",
-                "allowInsecure": false,
-                "wsSettings": {
+                "network": "httpupgrade",
+                "httpupgradeSettings": {
                     "path": "/$UUID-vless_hu_tor"
                 }
             },
@@ -1090,7 +1053,7 @@
             }
         },
         {
-            "tag": "in-ss_ws",
+            "tag": "in-ss_hu",
             "listen": "127.0.0.1",
             "port": 5600,
             "protocol": "shadowsocks",
@@ -1104,7 +1067,7 @@
             "streamSettings": {
                 "network": "httpupgrade",
                 "httpupgradeSettings": {
-                    "path": "/$UUID-ss_ws"
+                    "path": "/$UUID-ss_hu"
                 }
             },
             "sniffing": {
@@ -1369,6 +1332,42 @@
             }
         }
     ],
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "domainMatcher": "mph",
+        "rules": [
+            {
+                "type": "field",
+                "inboundTag": [
+                    "in-vless_ws-cf",
+                    "in-vless_ws_tor-cf",
+                    "in-vless_grpc-cf",
+                    "in-vless_grpc_tor-cf",
+                    "in-vless_hu-cf",
+                    "in-vless_hu_tor-cf",
+                    "in-vmess_ws-cf",
+                    "in-vmess_ws_tor-cf",
+                    "in-vmess_grpc-cf",
+                    "in-vmess_grpc_tor-cf",
+                    "in-vmess_hu-cf",
+                    "in-vmess_hu_tor-cf",
+                    "in-ss_ws-cf",
+                    "in-ss_ws_tor-cf",
+                    "in-ss_grpc-cf",
+                    "in-ss_grpc_tor-cf",
+                    "in-ss_hu-cf",
+                    "in-ss_hu_tor-cf",
+                    "in-trojan_ws-cf",
+                    "in-trojan_ws_tor-cf",
+                    "in-trojan_grpc-cf",
+                    "in-trojan_grpc_tor-cf",
+                    "in-trojan_hu-cf",
+                    "in-trojan_hu_tor-cf"
+                ],
+                "outboundTag": "out-cf"
+            }
+        ]
+    },
     "dns": {
         "servers": [
             {

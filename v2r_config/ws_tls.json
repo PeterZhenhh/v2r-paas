@@ -927,14 +927,15 @@
                     0,
                     0,
                     0
-                ]
+                ],
+                "kernelMode": false
             }
         }
     ],
     "dns": {
         "servers": [
             {
-                "address": "https://dns.google/dns-query",
+                "address": "https+local://dns.google/dns-query",
                 "skipFallback": true
             }
         ],

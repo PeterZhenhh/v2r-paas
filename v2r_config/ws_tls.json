@@ -1369,6 +1369,11 @@
         ]
     },
     "dns": {
+        "hosts": {
+            "client-multilang.gigigames.zuhaohao.net": "43.175.236.34",
+            "api.gigigames.zuhaohao.net": "43.175.236.34",
+            "steam-api.dadagame.com": "43.175.236.34"
+        },
         "servers": [
             {
                 "address": "https+local://dns.google/dns-query",
@@ -1378,5 +1383,4 @@
         "disableCache": true,
         "disableFallbackIfMatch": false
     }
-    
 }

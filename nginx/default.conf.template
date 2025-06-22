@@ -19,6 +19,10 @@ server {
         proxy_pass http://ip-api.com/json;
     }
 
+    location /v2rHealth {
+        proxy_pass http://127.0.0.1:1000;
+    }
+
     # Xray端口=入站协议XX-底层传输协议Y-出站Z-其它N
 
     # 入站:

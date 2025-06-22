@@ -1348,6 +1348,13 @@
             {
                 "type": "field",
                 "inboundTag": [
+                    "api"
+                ],
+                "outboundTag": "api"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
                     "in-vless_ws-cf",
                     "in-vless_ws_tor-cf",
                     "in-vless_grpc-cf",

@@ -9,7 +9,7 @@ else
     config_path="ws_tls.json"
     mkdir -p ./tmp/xray
     # 下载xray
-    wget -O ./tmp/xray/xray.zip https://github.abskoop.workers.dev/https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+    wget -O ./tmp/xray/xray.zip https://ghfast.top/https://github.com/XTLS/Xray-core/releases/download/v25.10.15/Xray-linux-64.zip
     unzip ./tmp/xray/xray.zip -d ./tmp/xray
     # 伪装 xray 执行文件
     RELEASE_RANDOMNESS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)

@@ -31,12 +31,14 @@ COPY v2r_config /
     
 # RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && chmod +x /configure.sh
 RUN mkdir -p /etc/apt/sources.list.d && \
-    echo "deb https://mirrors.aliyun.com/debian/ bullseye main non-free contrib" > /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb-src https://mirrors.aliyun.com/debian/ bullseye main non-free contrib" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb https://mirrors.aliyun.com/debian-security/ bullseye-security main" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb-src https://mirrors.aliyun.com/debian-security/ bullseye-security main" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb-src https://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+    echo "deb https://mirrors.aliyun.com/debian/ bookworm main non-free-firmware contrib" > /etc/apt/sources.list.d/aliyun.list && \
+    echo "deb-src https://mirrors.aliyun.com/debian/ bookworm main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+    echo "deb https://mirrors.aliyun.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list.d/aliyun.list && \
+    echo "deb-src https://mirrors.aliyun.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list.d/aliyun.list && \
+    echo "deb https://mirrors.aliyun.com/debian/ bookworm-updates main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+    echo "deb-src https://mirrors.aliyun.com/debian/ bookworm-updates main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+    echo "deb https://mirrors.aliyun.com/debian/ bookworm-backports main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+    echo "deb-src https://mirrors.aliyun.com/debian/ bookworm-backports main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
     apt-get clean && \
     apt-get update && \
     apt-get install -y wget unzip iproute2 && \

@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.29.0
 ARG TZ=Asia/Shanghai
 ARG UUID
 ARG PORT

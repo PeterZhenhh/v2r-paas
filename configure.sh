@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Cloudflare Warp
-curl -sLo warp-reg https://github.com/badafans/warp-reg/releases/download/v1.0/main-linux-amd64 && chmod +x warp-reg && ./warp-reg
+# curl -sLo warp-reg https://github.com/badafans/warp-reg/releases/download/v1.0/main-linux-amd64 && chmod +x warp-reg && ./warp-reg
 # Xray
 if [ -z $UUID ]; then
     echo "【XRAY】 UUID未配置"
@@ -9,7 +9,7 @@ else
     config_path="ws_tls.json"
     mkdir -p ./tmp/xray
     # 下载xray
-    wget -O ./tmp/xray/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+    wget -O ./tmp/xray/xray.zip https://github.abskoop.workers.dev/https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
     unzip ./tmp/xray/xray.zip -d ./tmp/xray
     # 伪装 xray 执行文件
     RELEASE_RANDOMNESS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)

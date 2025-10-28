@@ -28,10 +28,6 @@ COPY nginx/static-html /usr/share/nginx/html/index
 COPY nginx/h5-speedtest /usr/share/nginx/html/speedtest
 COPY configure.sh /configure.sh
 COPY v2r_config /
-
-# 使用阿里云 Debian 源（根据 nginx 镜像的 Debian 版本调整）
-RUN sed -i 's@http://deb.debian.org@http://mirrors.aliyun.com@g' /etc/apt/sources.list && \
-    sed -i 's@http://security.debian.org@http://mirrors.aliyun.com@g' /etc/apt/sources.list
     
 RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && chmod +x /configure.sh
 

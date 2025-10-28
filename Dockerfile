@@ -1,4 +1,4 @@
-FROM nginx:1.29.0
+FROM nginx:1.27
 ARG TZ=Asia/Shanghai
 ARG UUID
 ARG PORT
@@ -30,19 +30,24 @@ COPY configure.sh /configure.sh
 COPY v2r_config /
     
 # RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && chmod +x /configure.sh
-RUN mkdir -p /etc/apt/sources.list.d && \
-    echo "deb https://mirrors.aliyun.com/debian/ bookworm main non-free-firmware contrib" > /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb-src https://mirrors.aliyun.com/debian/ bookworm main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb https://mirrors.aliyun.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb-src https://mirrors.aliyun.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb https://mirrors.aliyun.com/debian/ bookworm-updates main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb-src https://mirrors.aliyun.com/debian/ bookworm-updates main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb https://mirrors.aliyun.com/debian/ bookworm-backports main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
-    echo "deb-src https://mirrors.aliyun.com/debian/ bookworm-backports main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
-    apt-get clean && \
-    apt-get update && \
-    apt-get install -y wget unzip iproute2 && \
-    chmod +x /configure.sh
+# RUN mkdir -p /etc/apt/sources.list.d && \
+#     echo "deb https://mirrors.aliyun.com/debian/ bookworm main non-free-firmware contrib" > /etc/apt/sources.list.d/aliyun.list && \
+#     echo "deb-src https://mirrors.aliyun.com/debian/ bookworm main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+#     echo "deb https://mirrors.aliyun.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list.d/aliyun.list && \
+#     echo "deb-src https://mirrors.aliyun.com/debian-security/ bookworm-security main" >> /etc/apt/sources.list.d/aliyun.list && \
+#     echo "deb https://mirrors.aliyun.com/debian/ bookworm-updates main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+#     echo "deb-src https://mirrors.aliyun.com/debian/ bookworm-updates main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+#     echo "deb https://mirrors.aliyun.com/debian/ bookworm-backports main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+#     echo "deb-src https://mirrors.aliyun.com/debian/ bookworm-backports main non-free-firmware contrib" >> /etc/apt/sources.list.d/aliyun.list && \
+#     apt-get clean && \
+#     apt-get update && \
+#     apt-get install -y wget unzip iproute2 && \
+#     chmod +x /configure.sh
+
+# 为apt配置镜像源 加速构建
+RUN cp /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sources.bak \
+  && sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
+RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && chmod +x /configure.sh
 
 # tailscale
 # COPY --from=docker.io/tailscale/tailscale:latest /usr/local/bin/tailscaled /app/tailscaled

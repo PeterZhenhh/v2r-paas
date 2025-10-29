@@ -49,6 +49,9 @@ RUN cp /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sou
   && sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
 RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && chmod +x /configure.sh
 
+RUN wget -O ./tmp/xray/xray.zip https://github.com/XTLS/Xray-core/releases/download/v25.10.15/Xray-linux-64.zip
+RUN unzip ./tmp/xray/xray.zip -d ./tmp/xray
+
 # tailscale
 # COPY --from=docker.io/tailscale/tailscale:latest /usr/local/bin/tailscaled /app/tailscaled
 # COPY --from=docker.io/tailscale/tailscale:latest /usr/local/bin/tailscale /app/tailscale

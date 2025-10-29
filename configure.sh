@@ -1,20 +1,24 @@
 #!/bin/sh
 
-# Xray
+# Nginx
+# 注入环境变量
+envsubst '\$PORT,\$UUID,\$WS_PATH' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+# 启动Nginx
+nginx
+
+# Xry
 if [ -z "$UUID" ]; then
     echo "【XRAY】 UUID未配置"
 else
-    config_path="ws_tls.json"
-    mkdir -p /tmp/xray
     RELEASE_RANDOMNESS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
-
-    # 拷贝预下载的 Xray
-    cp /opt/xray/xray /tmp/xray/${RELEASE_RANDOMNESS}
-    envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' < $config_path > /tmp/xray/config.json
-    envsubst '\$PORT,\$UUID,\$WS_PATH' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
-    nginx
-    mv /tmp/xray/config.json ./config.json
-    ./${RELEASE_RANDOMNESS} -config=config.json &
+    # 拷贝预下载的 Xry
+    mv /opt/xray/xray ./${RELEASE_RANDOMNESS}/${RELEASE_RANDOMNESS}
+    mv /opt/xray/geoip.dat ./${RELEASE_RANDOMNESS}/geoip.dat
+    mv /opt/xray/geosite.dat ./${RELEASE_RANDOMNESS}/geosite.dat
+    # 注入环境变量
+    envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' < /v2r_config/ws_tls.json > /${RELEASE_RANDOMNESS}/config.json
+    # 启动Xry
+    /${RELEASE_RANDOMNESS}/${RELEASE_RANDOMNESS} -config=config.json &
 fi
 
 # Tailscale

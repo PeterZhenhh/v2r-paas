@@ -11,14 +11,15 @@ if [ -z "$UUID" ]; then
     echo "【XRAY】 UUID未配置"
 else
     RELEASE_RANDOMNESS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
+    mkdir -p ./${RELEASE_RANDOMNESS}
     # 拷贝预下载的 Xry
     mv /opt/xray/xray ./${RELEASE_RANDOMNESS}/${RELEASE_RANDOMNESS}
     mv /opt/xray/geoip.dat ./${RELEASE_RANDOMNESS}/geoip.dat
     mv /opt/xray/geosite.dat ./${RELEASE_RANDOMNESS}/geosite.dat
     # 注入环境变量
-    envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' < /v2r_config/ws_tls.json > /${RELEASE_RANDOMNESS}/config.json
+    envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' < /v2r_config/ws_tls.json > ./${RELEASE_RANDOMNESS}/config.json
     # 启动Xry
-    /${RELEASE_RANDOMNESS}/${RELEASE_RANDOMNESS} -config=config.json &
+    ./${RELEASE_RANDOMNESS}/${RELEASE_RANDOMNESS} -config=./${RELEASE_RANDOMNESS}/config.json &
 fi
 
 # Tailscale

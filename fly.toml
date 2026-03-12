@@ -1,4 +1,4 @@
-app = 'rprxnext'
+app = 'v2rpaas'
 # swap_size_mb = 2048
 
 [build]

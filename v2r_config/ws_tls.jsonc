@@ -764,6 +764,37 @@
             }
         },
         {
+            "tag": "in-trojan_xh",
+            "listen": "127.0.0.1",
+            "port": 4700,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-trojan_xh",
+                    "mode": "auto"
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            }
+        },
+        {
             "tag": "in-trojan_ws-cf",
             "listen": "127.0.0.1",
             "port": 4010,
@@ -1285,7 +1316,7 @@
         {
             "tag": "in-ss_hu_tor-cf",
             "listen": "127.0.0.1",
-            "port": 5011,
+            "port": 5611,
             "protocol": "shadowsocks",
             "settings": {
                 "email": "love@v2fly.org",

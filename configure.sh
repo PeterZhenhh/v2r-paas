@@ -17,9 +17,9 @@ else
     mv /opt/xray/geoip.dat ./${RELEASE_RANDOMNESS}/geoip.dat
     mv /opt/xray/geosite.dat ./${RELEASE_RANDOMNESS}/geosite.dat
     # 注入环境变量
-    envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' < /v2r_config/ws_tls.json > ./${RELEASE_RANDOMNESS}/config.json
+    envsubst '\$UUID,\$CFKEY,\$CFV6,\$CFR1,\$CFR2,\$CFR3,\$WS_PATH' < /v2r_config/ws_tls.jsonc > ./${RELEASE_RANDOMNESS}/config.jsonc
     # 启动Xry
-    ./${RELEASE_RANDOMNESS}/${RELEASE_RANDOMNESS} -config=./${RELEASE_RANDOMNESS}/config.json &
+    ./${RELEASE_RANDOMNESS}/${RELEASE_RANDOMNESS} -config=./${RELEASE_RANDOMNESS}/config.jsonc &
 fi
 
 # Tailscale

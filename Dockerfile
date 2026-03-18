@@ -44,7 +44,7 @@ RUN chmod +x /configure.sh
 
 # ✅ 预下载并解压 Xray-core
 RUN mkdir -p /opt/xray \
-    && wget -O /opt/xray/xray.zip https://github.com/XTLS/Xray-core/releases/download/v25.10.15/Xray-linux-64.zip \
+    && wget -O /opt/xray/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip \
     && unzip /opt/xray/xray.zip -d /opt/xray \
     && rm /opt/xray/xray.zip
 

@@ -109,7 +109,7 @@
             "settings": {
                 "clients": [
                     {
-                        "password": "$UUID",
+                        "id": "$UUID",
                         "level": 0,
                         "email": "love@v2fly.org"
                     }
@@ -221,7 +221,7 @@
             "settings": {
                 "clients": [
                     {
-                        "password": "$UUID",
+                        "id": "$UUID",
                         "level": 0,
                         "email": "love@v2fly.org"
                     }
@@ -318,7 +318,7 @@
             "settings": {
                 "clients": [
                     {
-                        "password": "$UUID",
+                        "id": "$UUID",
                         "level": 0,
                         "email": "love@v2fly.org"
                     }
@@ -415,7 +415,7 @@
             "settings": {
                 "clients": [
                     {
-                        "password": "$UUID",
+                        "id": "$UUID",
                         "level": 0,
                         "email": "love@v2fly.org"
                     }

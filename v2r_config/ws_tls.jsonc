@@ -1062,7 +1062,7 @@
             }
         },
         {
-            "tag": "in-trojan_xh",
+            "tag": "in-trojan_xh-cf",
             "listen": "127.0.0.1",
             "port": 4710,
             "protocol": "trojan",

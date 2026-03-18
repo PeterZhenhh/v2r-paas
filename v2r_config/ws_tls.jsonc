@@ -102,6 +102,29 @@
             }
         },
         {
+            "tag": "in-vless_xh",
+            "listen": "127.0.0.1",
+            "port": 3700,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-vless_xh",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-vless_ws-cf",
             "listen": "127.0.0.1",
             "port": 3010,
@@ -191,6 +214,29 @@
             }
         },
         {
+            "tag": "in-vless_xh-cf",
+            "listen": "127.0.0.1",
+            "port": 3710,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-vless_xh-cf",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-vless_ws_tor",
             "listen": "127.0.0.1",
             "port": 3001,
@@ -265,6 +311,29 @@
             }
         },
         {
+            "tag": "in-vless_xh_tor",
+            "listen": "127.0.0.1",
+            "port": 3701,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-vless_xh_tor",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-vless_ws_tor-cf",
             "listen": "127.0.0.1",
             "port": 3011,
@@ -336,6 +405,29 @@
             },
             "sniffing": {
                 "enabled": false
+            }
+        },
+        {
+            "tag": "in-vless_xh_tor-cf",
+            "listen": "127.0.0.1",
+            "port": 3711,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-vless_xh_tor-cf",
+                    "mode": "auto"
+                }
             }
         },
         {
@@ -430,6 +522,29 @@
             }
         },
         {
+            "tag": "in-vmess_xh",
+            "listen": "127.0.0.1",
+            "port": 2700,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-vmess_xh",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-vmess_ws-cf",
             "listen": "127.0.0.1",
             "port": 2010,
@@ -521,6 +636,29 @@
             }
         },
         {
+            "tag": "in-vmess_xh-cf",
+            "listen": "127.0.0.1",
+            "port": 2710,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-vmess_xh-cf",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-vmess_ws_tor",
             "listen": "127.0.0.1",
             "port": 2001,
@@ -597,6 +735,29 @@
             }
         },
         {
+            "tag": "in-vmess_xh_tor",
+            "listen": "127.0.0.1",
+            "port": 2701,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-vmess_xh_tor",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-vmess_ws_tor-cf",
             "listen": "127.0.0.1",
             "port": 2011,
@@ -670,6 +831,29 @@
             },
             "sniffing": {
                 "enabled": false
+            }
+        },
+        {
+            "tag": "in-vmess_xh_tor-cf",
+            "listen": "127.0.0.1",
+            "port": 2711,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-vmess_xh_tor-cf",
+                    "mode": "auto"
+                }
             }
         },
         {
@@ -784,14 +968,6 @@
                     "path": "/$UUID-trojan_xh",
                     "mode": "auto"
                 }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "quic"
-                ]
             }
         },
         {
@@ -886,6 +1062,29 @@
             }
         },
         {
+            "tag": "in-trojan_xh",
+            "listen": "127.0.0.1",
+            "port": 4710,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-trojan_xh-cf",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-trojan_ws_tor",
             "listen": "127.0.0.1",
             "port": 4001,
@@ -962,6 +1161,29 @@
             }
         },
         {
+            "tag": "in-trojan_xh_tor",
+            "listen": "127.0.0.1",
+            "port": 4701,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-trojan_xh_tor",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-trojan_ws_tor-cf",
             "listen": "127.0.0.1",
             "port": 4011,
@@ -1035,6 +1257,29 @@
             },
             "sniffing": {
                 "enabled": false
+            }
+        },
+        {
+            "tag": "in-trojan_xh_tor-cf",
+            "listen": "127.0.0.1",
+            "port": 4711,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "$UUID",
+                        "level": 0,
+                        "email": "love@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-trojan_xh_tor-cf",
+                    "mode": "auto"
+                }
             }
         },
         {
@@ -1120,6 +1365,26 @@
             }
         },
         {
+            "tag": "in-ss_xh",
+            "listen": "127.0.0.1",
+            "port": 5700,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-ss_xh",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-ss_ws-cf",
             "listen": "127.0.0.1",
             "port": 5010,
@@ -1202,6 +1467,26 @@
             }
         },
         {
+            "tag": "in-ss_xh-cf",
+            "listen": "127.0.0.1",
+            "port": 5710,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-ss_xh-cf",
+                    "mode": "auto"
+                }
+            }
+        },
+        {
             "tag": "in-ss_ws_tor",
             "listen": "127.0.0.1",
             "port": 5001,
@@ -1266,6 +1551,26 @@
             },
             "sniffing": {
                 "enabled": false
+            }
+        },
+        {
+            "tag": "in-ss_xh_tor",
+            "listen": "127.0.0.1",
+            "port": 5701,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-ss_xh_tor",
+                    "mode": "auto"
+                }
             }
         },
         {
@@ -1334,6 +1639,26 @@
             "sniffing": {
                 "enabled": false
             }
+        },
+        {
+            "tag": "in-ss_xh_tor-cf",
+            "listen": "127.0.0.1",
+            "port": 5711,
+            "protocol": "shadowsocks",
+            "settings": {
+                "email": "love@v2fly.org",
+                "method": "chacha20-ietf-poly1305",
+                "password": "$UUID",
+                "network": "tcp,udp",
+                "ivCheck": true
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/$UUID-ss_xh_tor-cf",
+                    "mode": "auto"
+                }
+            }
         }
     ],
     "outbounds": [
@@ -1392,24 +1717,32 @@
                     "in-vless_grpc_tor-cf",
                     "in-vless_hu-cf",
                     "in-vless_hu_tor-cf",
+                    "in-vless_xh-cf",
+                    "in-vless_xh_tor-cf",
                     "in-vmess_ws-cf",
                     "in-vmess_ws_tor-cf",
                     "in-vmess_grpc-cf",
                     "in-vmess_grpc_tor-cf",
                     "in-vmess_hu-cf",
                     "in-vmess_hu_tor-cf",
+                    "in-vmess_xh-cf",
+                    "in-vmess_xh_tor-cf",
                     "in-ss_ws-cf",
                     "in-ss_ws_tor-cf",
                     "in-ss_grpc-cf",
                     "in-ss_grpc_tor-cf",
                     "in-ss_hu-cf",
                     "in-ss_hu_tor-cf",
+                    "in-ss_xh-cf",
+                    "in-ss_xh_tor-cf",
                     "in-trojan_ws-cf",
                     "in-trojan_ws_tor-cf",
                     "in-trojan_grpc-cf",
                     "in-trojan_grpc_tor-cf",
                     "in-trojan_hu-cf",
-                    "in-trojan_hu_tor-cf"
+                    "in-trojan_hu_tor-cf",
+                    "in-trojan_xh-cf",
+                    "in-trojan_xh_tor-cf"
                 ],
                 "outboundTag": "out-cf"
             }

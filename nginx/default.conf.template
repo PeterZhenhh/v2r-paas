@@ -161,6 +161,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+    # 3700->vless_xh
+    location /$UUID-vless_xh {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:3700;
+    }
+
     # 3010->vless_ws-cf
     location /$UUID-vless_ws-cf {
         proxy_redirect off;
@@ -199,6 +209,16 @@ server {
         # Show real IP in v2ray access.log
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # 3710->vless_xh-cf
+    location /$UUID-vless_xh-cf {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:3710;
     }
 
     # 3001->vless_ws_tor
@@ -241,6 +261,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+    # 3701->vless_xh_tor
+    location /$UUID-vless_xh_tor {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:3701;
+    }
+
     # 3011->vless_ws_tor-cf
     location /$UUID-vless_ws_tor-cf {
         proxy_redirect off;
@@ -281,6 +311,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+    # 3711->vless_xh_tor-cf
+    location /$UUID-vless_xh_tor-cf {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:3711;
+    }
+
     # 2000->vmess_ws
     location /$UUID-vmess_ws {
         proxy_redirect off;
@@ -319,6 +359,15 @@ server {
         # Show real IP in v2ray access.log
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    # 2700->vmess_xh
+    location /$UUID-vmess_xh {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:2700;
     }
 
     # 2010->vmess_ws-cf
@@ -361,6 +410,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+    # 2710->vmess_xh-cf
+    location /$UUID-vmess_xh-cf {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:2710;
+    }
+
     # 2001->vmess_ws_tor
     location /$UUID-vmess_ws_tor {
         proxy_redirect off;
@@ -401,6 +460,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+    # 2701->vmess_xh_tor
+    location /$UUID-vmess_xh_tor {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:2701;
+    }
+
     # 2011->vmess_ws_tor-cf
     location /$UUID-vmess_ws_tor-cf {
         proxy_redirect off;
@@ -439,6 +508,16 @@ server {
         # Show real IP in v2ray access.log
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # 2711->vmess_xh_tor-cf
+    location /$UUID-vmess_xh_tor-cf {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:2711;
     }
 
     # 4000->trojan_ws
@@ -531,6 +610,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+    # 4710->trojan_xh-cf
+    location /$UUID-trojan_xh-cf {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:4710;
+    }
+
     # 4001->trojan_ws_tor
     location /$UUID-trojan_ws_tor {
         proxy_redirect off;
@@ -569,6 +658,16 @@ server {
         # Show real IP in v2ray access.log
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # 4701->trojan_xh_tor
+    location /$UUID-trojan_xh_tor {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:4701;
     }
 
     # 4011->trojan_ws_tor-cf
@@ -611,6 +710,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+    # 4711->trojan_xh_tor-cf
+    location /$UUID-trojan_xh_tor-cf {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:4711;
+    }
+
     # 5000->ss_ws
     location /$UUID-ss_ws {
         proxy_redirect off;
@@ -649,6 +758,16 @@ server {
         # Show real IP in v2ray access.log
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # 5700->ss_xh
+    location /$UUID-ss_xh {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:5700;
     }
 
     # 5010->ss_ws-cf
@@ -691,6 +810,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+    # 5710->ss_xh-cf
+    location /$UUID-ss_xh-cf {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:5710;
+    }
+
     # 5001->ss_ws_tor
     location /$UUID-ss_ws_tor {
         proxy_redirect off;
@@ -731,6 +860,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+    # 5701->ss_xh_tor
+    location /$UUID-ss_xh_tor {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:5701;
+    }
+
     # 5011->ss_ws_tor-cf
     location /$UUID-ss_ws_tor-cf {
         proxy_redirect off;
@@ -769,5 +908,15 @@ server {
         # Show real IP in v2ray access.log
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # 5711->ss_xh_tor-cf
+    location /$UUID-ss_xh_tor-cf {
+        client_max_body_size 0;
+        grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        client_body_timeout 5m;
+        grpc_read_timeout 315;
+        grpc_send_timeout 5m;
+        grpc_pass grpc://127.0.0.1:5711;
     }
 }

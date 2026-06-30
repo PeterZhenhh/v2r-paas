@@ -33,7 +33,7 @@ else
     /opt/tailscale/tailscale --socket=/tmp/tailscaled.sock up \
         --authkey=$TAILSCALE_AUTHKEY \
         --hostname=${TAILSCALE_HOSTNAME:-$(hostname)} \
-        --advertise-exit-node
+        --advertise-exit-node \
         --advertise-tags=$TAILSCALE_TAG &
 fi
 

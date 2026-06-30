@@ -33,7 +33,8 @@ else
     /opt/tailscale/tailscale --socket=/tmp/tailscaled.sock up \
         --authkey=$TAILSCALE_AUTHKEY \
         --hostname=${TAILSCALE_HOSTNAME:-$(hostname)} \
-        --advertise-exit-node &
+        --advertise-exit-node
+        --advertise-tags=tag:outbound-only &
 fi
 
 # 保持运行

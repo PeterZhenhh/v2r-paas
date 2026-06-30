@@ -34,7 +34,7 @@ else
         --authkey=$TAILSCALE_AUTHKEY \
         --hostname=${TAILSCALE_HOSTNAME:-$(hostname)} \
         --advertise-exit-node
-        --advertise-tags=tag:outbound-only &
+        --advertise-tags=$TAILSCALE_TAG &
 fi
 
 # 保持运行
